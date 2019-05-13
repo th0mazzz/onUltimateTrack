@@ -33,9 +33,14 @@ team -- 2019-05-09 13:57
 - People chimed in with the miscellanous things here and there
 ==============================================================
 
-lastF -- 2019-05-07 21:17
+team -- 2019-05-12 22:03
 --------------------------------------------------------------
-- 
+- Johnny clarified parts of the site map
+- Aaron worked on improving the clarity of the visual
+- Thomas clarified in db schema that there will be creators 
+  and team admins instead of coaches and players 
+- Stefan edited the summary to reflect that there will be 
+  creators and team admins not coaches and players
 ==============================================================
 
 lastF -- 2019-05-07 21:17
