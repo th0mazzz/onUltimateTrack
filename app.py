@@ -1,5 +1,13 @@
-from flask import Flask, render_template
+import os
+
+from flask import Flask, render_template, redirect, request, session, url_for
+from util import database
+
 app = Flask(__name__)
+app.secret_key = os.urandom(32)
+
+DB_FILE = 'data/borkbook.db'
+database.create_db()
 
 @app.route('/')
 def landing():
@@ -15,7 +23,7 @@ def register():
 
 @app.route('/auth', methods=["POST"])
 def auth():
-    return "this is supposed to authenticate user"
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
