@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def landing():
-    return render_template('base.html')
+    return render_template('login.html')
 
 @app.route('/login')
 def login():
