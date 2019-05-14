@@ -18,8 +18,10 @@ def create_db():
 def getUser(inputusername):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    c.execute("SELECT username, team_ids, player_name, player_age, player_height, player_weight, player_jersey FROM users WHERE username = ?", (inputusername,))
+    c.execute("SELECT username, password, team_ids, player_name, player_age, player_height, player_weight, player_jersey FROM users WHERE username = ?", (inputusername,))
     selectedVal = c.fetchone()
     db.commit()
     db.close()
     return selectedVal
+
+def addUser(uname, upass)

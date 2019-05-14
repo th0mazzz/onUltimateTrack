@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, redirect, request, session, url_for
+from flask import flash, Flask, render_template, redirect, request, session, url_for
 from util import database
 
 app = Flask(__name__)
@@ -21,8 +21,39 @@ def login():
 def register():
     return render_template('register.html')
 
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
 @app.route('/auth', methods=["POST"])
 def auth():
+    user, pwd = request.form['username'], request.form['password']
+    if 'confirmpassword' not in request.form:
+        returnedStuff = database.getUser(user)
+        if returnedStuff == None:
+            flash('Incorrect username!')
+            return redirect(url_for('login'))
+            print(returnedStuff)
+
+        if pwd != returnedStuff[1]:
+            flash('Incorrect password!')
+            return redirect(url_for('login'))
+    else:
+        confirmpwd = request.form['confirmpassword']
+        returnedStuff = database.getUser(user)
+        if returnedStuff == None:
+            if pwd != confirmpwd:
+                flash('Passwords do not match')
+                return redirect(url_for('register'))
+            
+        flash('Username is taken')
+        return redirect(url_for('register'))
+
+        print('asjdasdnn')
+
+    return redirect(url_for('home'))
+
+
 
 if __name__ == '__main__':
     app.debug = True
