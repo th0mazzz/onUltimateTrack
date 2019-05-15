@@ -88,9 +88,10 @@ thomasZ -- 2019-05-14 14:05
 - Working on login functionality with frontend and database
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+thomasZ -- 2019-05-15 14:09
 --------------------------------------------------------------
--
+- Created registerUser function in database.py
+- Created a play_name thingie in plays table because plays need names
 ==============================================================
 
 firstL -- 2019-05-07 21:17
