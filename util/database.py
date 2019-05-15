@@ -24,4 +24,4 @@ def getUser(inputusername):
     db.close()
     return selectedVal
 
-def addUser(uname, upass)
+# def addUser(uname, upass)
