@@ -31,7 +31,7 @@ def getUser(inputusername):
     db.close()
     return selectedVal
 
-def registerUser(username, password, player_name, player_age=0, player_height=0, player_weight=0, player_jersey=0): 
+def registerUser(username, password, player_name, player_age=0, player_height=0, player_weight=0, player_jersey=0):
     '''
     REGISTERS USERS
     '''
