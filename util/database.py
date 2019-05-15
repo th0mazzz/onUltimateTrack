@@ -3,6 +3,9 @@ import sqlite3
 DB_FILE = "data/borkbook.db"
 
 def create_db():
+    '''
+    CREATES THE DATABASE WITH THE TABLES
+    '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
 
@@ -16,6 +19,10 @@ def create_db():
     return True;
 
 def getUser(inputusername):
+    '''
+    RETURNS TUPLE OF FOLLOWING USER INFO OF inputusername
+    (username, password, team_ids, player_name, player_age, player_height, player_weight, player_jersey)
+    '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     c.execute("SELECT username, password, team_ids, player_name, player_age, player_height, player_weight, player_jersey FROM users WHERE username = ?", (inputusername,))
@@ -24,4 +31,16 @@ def getUser(inputusername):
     db.close()
     return selectedVal
 
-def addUser(uname, upass)
+def registerUser(username, password, player_name, player_age=0, player_height=0, player_weight=0, player_jersey=0): 
+    '''
+    REGISTERS USERS
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+
+    c.execute('INSERT INTO users VALUES (?,?,?,?,?,?,?)', (username, password, '', player_name, player_age, player_height, player_weight, player_jersey))
+    #username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT
+    db.commit()
+    db.close()
+
+    return True

@@ -45,11 +45,19 @@ def auth():
             if pwd != confirmpwd:
                 flash('Passwords do not match')
                 return redirect(url_for('register'))
-            
+
         flash('Username is taken')
         return redirect(url_for('register'))
 
         print('asjdasdnn')
+
+    player_name = request.form['player_name']
+    player_age = request.form['player_age']
+    player_height = request.form['player_height']
+    player_weight = request.form['player_weight']
+    player_jersey = request.form['player_jersey']
+
+    database.registerUser(user, pwd, player_name, player_age, player_height, player_weight, player_jersey)
 
     return redirect(url_for('home'))
 
