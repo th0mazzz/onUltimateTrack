@@ -6,7 +6,7 @@ def insert_test_data():
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
 
-    c.execute("INSERT INTO users VALUES(?,?,?,?,?,?,?,?)", ("useruno", "pass", "1", "johnny wong", 18, '''4'1"''', "9000lbs", 30))
+    c.execute("INSERT INTO users VALUES(?,?,?,?,?,?,?,?)", ("useruno", "pass", "1,33", "johnny wong", 18, '''4'1"''', "9000lbs", 30))
     c.execute("INSERT INTO plays VALUES(?,?,?,?,?,?)", ("useruno", "i make big flayz", "", "useruno", "", "1"))
     c.execute("INSERT INTO teams VALUES(?,?,?,?)", ("team yeeters", "ultimate freesbi", "1", "useruno"))
 
@@ -63,6 +63,52 @@ def registerUser(username, password, player_name, player_age=0, player_height=0,
 def createPlay(creator, play_name, command_list, editor_list, viewer_list, team_id):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
+    c.execute('INSERT INTO plays VALUES (?,?,?,?,?,?)', (creator, play_name, command_list, editor_list, viewer_list, team_id))
+    c.commit()
+    c.close()
+    return True
+
+def editPlay(play_name, team_id):
+    return 'WILL BE IMPLEMETED IN THE FUTURE'
+
+def createTeam(team_name, sport, team_id, team_admins):
+    '''
+    CREATES TEAM AND INSERTS INTO THE DATABASE
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute('INSERT INTO teams VALUES (?,?,?,?)', (team_name, sport, team_id, team_admins))
+    c.commit()
+    c.close()
+    return True
+
+def getPlaysByTeamId(team_id):
+    '''
+    RETURNS PLAYS THAT MATCH THE GIVEN team_id
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    plays = c.execute('SELECT * FROM plays WHERE plays.team_id = ?', (team_id,))
+    c.commit()
+    c.close()
+    return plays
+
+def getTeamsByUser(username):
+    '''
+    RETURNS LIST OF TEAM_IDS THAT USER username IS PART OF
+    '''
+    userInfo = getUser(username)
+    #print(userInfo)
+    teamsUserIsOn = userInfo[2]
+    teamsUserIsOn = teamsUserIsOn.split(',')
+    teamsUserIsOn = [int(x) for x in teamsUserIsOn]
+    return teamsUserIsOn
+
+def getRosterByTeamId(team_id):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    userbase = c.execute('SELECT * FROM users')
+
     c.commit()
     c.close()
     return True
