@@ -14,19 +14,19 @@ DIR += '/'
 
 @app.route('/')
 def landing():
-    return render_template('login.html')
+    return render_template(DIR + 'login.html')
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    return render_template(DIR + 'login.html')
 
 @app.route('/register')
 def register():
-    return render_template('register.html')
+    return render_template(DIR + 'register.html')
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    return render_template(DIR + 'home.html')
 
 @app.route('/auth', methods=["POST"])
 def auth():
