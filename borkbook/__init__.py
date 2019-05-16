@@ -9,6 +9,9 @@ app.secret_key = os.urandom(32)
 DB_FILE = 'data/borkbook.db'
 database.create_db()
 
+DIR = os.path.dirname(__file__)
+DIR += '/'
+
 @app.route('/')
 def landing():
     return render_template('login.html')
