@@ -101,9 +101,11 @@ johnnyW -- 2019-05-16 14:02
 - Need to send all SVG elements to Python
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+thomasZ -- 2019-05-16 14:08
 --------------------------------------------------------------
--
+- Added more functions to database.py
+- Talked with Johnny about retrieving path data
+- Stefan is working on Apache integration
 ==============================================================
 
 firstL -- 2019-05-07 21:17
