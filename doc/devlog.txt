@@ -94,6 +94,13 @@ thomasZ -- 2019-05-15 14:09
 - Created a play_name thingie in plays table because plays need names
 ==============================================================
 
+johnnyW -- 2019-05-16 14:02
+--------------------------------------------------------------
+- Worked on sending DOM element attributes to Python through Ajax
+- Able to print out 'd' attributes of path elements
+- Need to send all SVG elements to Python
+==============================================================
+
 firstL -- 2019-05-07 21:17
 --------------------------------------------------------------
 -
