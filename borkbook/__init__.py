@@ -9,8 +9,7 @@ app.secret_key = os.urandom(32)
 DIR = os.path.dirname(__file__)
 DIR += '/'
 
-#DB_FILE = DIR + 'data/borkbook.db'
-DB_FILE = "/var/www/borkbook/borkbook/data/borkbook.db"
+DB_FILE = DIR + 'data/borkbook.db'
 database.create_db()
 
 @app.route('/')
