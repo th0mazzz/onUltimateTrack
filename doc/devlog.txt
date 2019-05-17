@@ -108,9 +108,12 @@ thomasZ -- 2019-05-16 14:08
 - Stefan is working on Apache integration
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+stefanT -- 2019-05-16 21:52
 --------------------------------------------------------------
--
+- Deployed flask app to droplet
+- Commented out util as it is not recognized and as a result
+  commented out the login route as well
+- Need to find a fix to the util not being recognized
 ==============================================================
 
 firstL -- 2019-05-07 21:17
