@@ -1,7 +1,8 @@
 import os
 
 from flask import flash, Flask, render_template, redirect, request, session, url_for
-#from util import database   util not recognized as module for apache2?
+
+from util import database   util not recognized as module for apache2?
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
