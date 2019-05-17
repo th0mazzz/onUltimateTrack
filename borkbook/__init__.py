@@ -31,7 +31,7 @@ def register():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    return render_template('home.html', username = session['username'])
 
 @app.route('/auth', methods=["POST"])
 def auth():
@@ -45,6 +45,7 @@ def auth():
     if pwd != returnedStuff[1]:
         flash('Incorrect password!')
         return redirect(url_for('login'))
+    session['username'] = user
     return redirect(url_for('home'))
 
 @app.route('/auth2', methods=['POST'])
@@ -67,6 +68,7 @@ def auth2():
 
         database.registerUser(user, pwd, player_name, player_age, player_height, player_weight, player_jersey)
 
+        session['username'] = user
         return redirect(url_for('home'))
 
     flash('Username is taken')
