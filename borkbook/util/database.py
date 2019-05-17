@@ -18,8 +18,6 @@ def insert_test_data():
 def create_db():
     '''CREATES THE DATABASE WITH THE TABLES'''
 
-    print(DB_FILE)
-
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
 
