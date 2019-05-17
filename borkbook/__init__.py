@@ -1,7 +1,7 @@
 import os
 
 from flask import flash, Flask, render_template, redirect, request, session, url_for
-#from util import database
+#from util import database   util not recognized as module for apache2?
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
@@ -11,12 +11,6 @@ DIR += '/'
 
 DB_FILE = DIR + 'data/borkbook.db'
 #database.create_db()
-
-'''
-@app.route('/')
-def landing():
-    return "hello"
-'''
 
 @app.route('/')
 def landing():
