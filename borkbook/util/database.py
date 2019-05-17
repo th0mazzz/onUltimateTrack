@@ -1,6 +1,7 @@
-import sqlite3
+import os, sqlite3
 
-DB_FILE = "borkbook/data/borkbook.db"
+DB_FILE = 'data/borkbook.db'
+
 
 def insert_test_data():
     db = sqlite3.connect(DB_FILE)
@@ -17,6 +18,8 @@ def insert_test_data():
 def create_db():
     '''CREATES THE DATABASE WITH THE TABLES'''
 
+    print(DB_FILE)
+
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
 
@@ -24,7 +27,6 @@ def create_db():
     c.execute("CREATE TABLE IF NOT EXISTS plays(creator TEXT, play_name TEXT, command_list TEXT, editor_list TEXT, viewer_list TEXT, team_ids INT)")
     c.execute("CREATE TABLE IF NOT EXISTS teams(team_name TEXT, sport TEXT, team_id INT PRIMARY KEY, team_admins TEXT)")
 
-    print("executed")
 
     db.commit()
     db.close()
