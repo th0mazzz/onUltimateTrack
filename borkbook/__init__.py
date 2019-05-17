@@ -14,7 +14,12 @@ database.create_db()
 
 @app.route('/')
 def landing():
-    return render_template(DIR + 'login.html')
+    return "hello"
+
+'''
+@app.route('/')
+def landing():
+    return render_template('login.html')
 
 @app.route('/login')
 def login():
@@ -63,7 +68,7 @@ def auth():
     database.registerUser(user, pwd, player_name, player_age, player_height, player_weight, player_jersey)
 
     return redirect(url_for('home'))
-
+'''
 
 
 if __name__ == '__main__':
