@@ -31,6 +31,7 @@
 </nav>
 <div class="container">
     <div class="row">
+        <div class="col-sm-2"></div>
         <div class="col text-center">
             {% set msgs = get_flashed_messages() %}
             {% for msg in msgs %}
@@ -40,6 +41,7 @@
             {% endfor %}
             <h1 class="display-3 mb-2 mt-1">Welcome!</h1>
         </div>
+        <div class="col-sm-2"></div>
     </div>
     <div class="row">
         <div class="col-sm-2"></div>
@@ -52,7 +54,8 @@
                 </div>
                 <div class="form-group">
                     <label for="pass">Password</label>
-                    <input type="password" class="form-control" id="pass" placeholder="Password" name="password" required>
+                    <input type="password" class="form-control" id="pass" placeholder="Password" name="password"
+                        required>
                 </div>
                 <div class="row">
                     <div class="col text-center">
