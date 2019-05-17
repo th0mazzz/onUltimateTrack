@@ -2,16 +2,20 @@ import os
 
 from flask import flash, Flask, render_template, redirect, request, session, url_for
 
-from util import database 
+from util import database
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
-DIR = os.path.dirname(__file__)
-DIR += '/'
+#DIR = os.path.dirname(__file__)
+#DIR += '/'
 
-DB_FILE = DIR + 'data/borkbook.db'
-#database.create_db()
+#DB_FILE = DIR + 'data/borkbook.db'
+
+#print(DB_FILE)
+
+database.create_db()
+#database.insert_test_data()
 
 @app.route('/')
 def landing():
@@ -28,7 +32,7 @@ def register():
 @app.route('/home')
 def home():
     return render_template('home.html')
-'''
+
 @app.route('/auth', methods=["POST"])
 def auth():
     user, pwd = request.form['username'], request.form['password']
@@ -64,7 +68,7 @@ def auth():
     database.registerUser(user, pwd, player_name, player_age, player_height, player_weight, player_jersey)
 
     return redirect(url_for('home'))
-'''
+
 
 
 if __name__ == '__main__':
