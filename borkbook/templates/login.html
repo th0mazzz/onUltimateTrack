@@ -6,8 +6,8 @@
 
 {% block body %}
 <!-- Image and text -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-    <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+    <a class="navbar-brand" href="/">Borkbook</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -15,36 +15,53 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Plays<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Teams<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">My Account<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            <li class="nav-item active">
+                <a class="nav-link logout" href="#">Logout<span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>
 </nav>
 <div class="container">
-    <div class="row mt-5">
-        <div class="col">
-            <h1>Hello</h1>
-
+    <div class="row">
+        <div class="col text-center">
             {% set msgs = get_flashed_messages() %}
             {% for msg in msgs %}
-            <text>{{msg}}</text>
+            <div class="alert alert-primary" role="alert">
+                {{ msg }}
+            </div>
             {% endfor %}
-
+            <h1 class="display-3 mb-2">Welcome!</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col">
             <form action="/auth" method="POST">
-                Username: <input name="username" type="text">
-                Password: <input name="password" type="password">
-                <input type="submit">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Username</label>
+                    <input type="text" class="form-control" id="user" aria-describedby="emailHelp"
+                        placeholder="Enter username" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="pass">Password</label>
+                    <input type="password" class="form-control" id="pass" placeholder="Password" name="password">
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
             </form>
         </div>
+        <div class="col-sm-2"></div>
     </div>
 </div>
 
