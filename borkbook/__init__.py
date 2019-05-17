@@ -12,11 +12,12 @@ DIR += '/'
 DB_FILE = DIR + 'data/borkbook.db'
 #database.create_db()
 
+'''
 @app.route('/')
 def landing():
     return "hello"
-
 '''
+
 @app.route('/')
 def landing():
     return render_template('login.html')
@@ -32,7 +33,7 @@ def register():
 @app.route('/home')
 def home():
     return render_template('home.html')
-
+'''
 @app.route('/auth', methods=["POST"])
 def auth():
     user, pwd = request.form['username'], request.form['password']
