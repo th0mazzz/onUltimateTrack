@@ -53,7 +53,7 @@ def registerUser(username, password, player_name, player_age=0, player_height=0,
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
 
-    c.execute('INSERT INTO users VALUES (?,?,?,?,?,?,?)', (username, password, '', player_name, player_age, player_height, player_weight, player_jersey))
+    c.execute('INSERT INTO users VALUES (?,?,?,?,?,?,?,?)', (username, password, '', player_name, player_age, player_height, player_weight, player_jersey))
     #username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT
     db.commit()
     db.close()

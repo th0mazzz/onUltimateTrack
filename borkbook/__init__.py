@@ -36,41 +36,42 @@ def home():
 @app.route('/auth', methods=["POST"])
 def auth():
     user, pwd = request.form['username'], request.form['password']
-    if 'confirmpassword' not in request.form:
-        returnedStuff = database.getUser(user)
-        if returnedStuff == None:
-            flash('Incorrect username!')
-            return redirect(url_for('login'))
-            print(returnedStuff)
+    returnedStuff = database.getUser(user)
+    if returnedStuff == None:
+        flash('Incorrect username!')
+        return redirect(url_for('login'))
+        print(returnedStuff)
 
-        if pwd != returnedStuff[1]:
-            flash('Incorrect password!')
-            return redirect(url_for('login'))
+    if pwd != returnedStuff[1]:
+        flash('Incorrect password!')
+        return redirect(url_for('login'))
     return redirect(url_for('home'))
 
-    '''
-    else:
-        confirmpwd = request.form['confirmpassword']
-        returnedStuff = database.getUser(user)
-        if returnedStuff == None:
-            if pwd != confirmpwd:
-                flash('Passwords do not match')
-                return redirect(url_for('register'))
+@app.route('/auth2', methods=['POST'])
+def auth2():
 
-            player_name = request.form['player_name']
-            player_age = request.form['player_age']
-            player_height = request.form['player_height']
-            player_weight = request.form['player_weight']
-            player_jersey = request.form['player_jersey']
+    user, pwd = request.form['username'], request.form['password']
+    confirmpwd = request.form['confirmpassword']
+    returnedStuff = database.getUser(user)
+    if returnedStuff == None:
+        if pwd != confirmpwd:
+            flash('Passwords do not match')
+            return redirect(url_for('register'))
+
+        player_name = request.form['player_name']
+        player_age = request.form['player_age']
+        player_height = request.form['player_height']
+        player_weight = request.form['player_weight']
+        player_jersey = request.form['player_jersey']
 
 
-            database.registerUser(user, pwd, player_name, player_age, player_height, player_weight, player_jersey)
+        database.registerUser(user, pwd, player_name, player_age, player_height, player_weight, player_jersey)
 
-            return redirect(url_for('home'))
+        return redirect(url_for('home'))
 
-        flash('Username is taken')
-        return redirect(url_for('register'))
-    '''
+    flash('Username is taken')
+    return redirect(url_for('register'))
+
 
 if __name__ == '__main__':
     app.debug = True
