@@ -6,11 +6,11 @@ from util import database
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
-DB_FILE = 'data/borkbook.db'
-database.create_db()
-
 DIR = os.path.dirname(__file__)
 DIR += '/'
+
+DB_FILE = DIR + 'data/borkbook.db'
+database.create_db()
 
 @app.route('/')
 def landing():
@@ -18,15 +18,15 @@ def landing():
 
 @app.route('/login')
 def login():
-    return render_template(DIR + 'login.html')
+    return render_template('login.html')
 
 @app.route('/register')
 def register():
-    return render_template(DIR + 'register.html')
+    return render_template('register.html')
 
 @app.route('/home')
 def home():
-    return render_template(DIR + 'home.html')
+    return render_template('home.html')
 
 @app.route('/auth', methods=["POST"])
 def auth():
