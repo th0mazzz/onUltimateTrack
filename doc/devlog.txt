@@ -147,9 +147,11 @@ aaronL -- 2019-05-20 13:32
 - updated nav links for logout
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+johnnyW & stefanT -- 2019-05-20 14:04
 --------------------------------------------------------------
--
+- worked on sending svg objects to python
+- organized how they would be stored in database on KtS
+- discussed how they would be sent from client to server and back 
 ==============================================================
 
 firstL -- 2019-05-07 21:17
