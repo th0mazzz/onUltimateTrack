@@ -1,6 +1,7 @@
 body {
     padding-top: 70px; 
     font-family: "Raleway";
+    /* background-image: url("../static/login_background.jpg"); */
 }
 
 .navbar-brand {
