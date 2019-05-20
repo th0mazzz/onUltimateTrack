@@ -136,7 +136,7 @@ thomasZ -- 2019-05-17 15:07
 --------------------------------------------------------------
 - Fixed database access issues
 - Implemented login and register functionality in __init__.py
-  and database.py
+and database.py
 ==============================================================
 
 firstL -- 2019-05-07 21:17
