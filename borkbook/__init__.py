@@ -33,6 +33,14 @@ def register():
 def home():
     return render_template('home.html', username = session['username'])
 
+@app.route('/logout')
+def logout():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    session.pop('username', None)
+    flash('Successfully logged out!')
+    return redirect(url_for('login'))
+
 @app.route('/auth', methods=["POST"])
 def auth():
     user, pwd = request.form['username'], request.form['password']

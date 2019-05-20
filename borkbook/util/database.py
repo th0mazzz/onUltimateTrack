@@ -2,8 +2,8 @@ import os, sqlite3
 
 DB_FILE = 'data/borkbook.db'
 
-
 def insert_test_data():
+    '''INSERTS TEST DATA'''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
 
@@ -60,7 +60,21 @@ def registerUser(username, password, player_name, player_age=0, player_height=0,
 
     return True
 
+def changePlayerName(username, new_player_name):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+
+    c.execute('UPDATE users SET player_name = (?) WHERE users.username = (?)', (new_player_name, username))
+    #username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT
+    db.commit()
+    db.close()
+
+    return True
+
 def createPlay(creator, play_name, command_list, editor_list, viewer_list, team_id):
+    '''
+    CREATES A PLAY AND INSERTS INTO THE DATABASE
+    '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     c.execute('INSERT INTO plays VALUES (?,?,?,?,?,?)', (creator, play_name, command_list, editor_list, viewer_list, team_id))
