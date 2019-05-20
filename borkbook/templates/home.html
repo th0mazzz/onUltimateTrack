@@ -1,7 +1,49 @@
 {% extends "base.html" %}
-{% block title %} Pocket Playbook {% endblock %}
+{% block title %} Borkbook | Pocket Playbook {% endblock %}
 
 {% block body %}
-<h1> welcome {{username}} </h1>
-<h1> this is the home page</h1>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top mb-0">
+    <a class="navbar-brand" href="/">Borkbook</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Plays<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Teams<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">My Account<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link logout" href="/logout">Logout<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid bg-light mt-0">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="display-3 text-primary"> welcome {{username}} </h1>
+            </div>
+        </div>
+        <hr>
+        <div class="row mt-1">
+            <div class="col">
+                <h1>Teams you're on</h1>
+            </div>
+        </div>
+        <hr>
+        <div class="row mt-1">
+            <div class="col">
+                <h1>Teams you're coaching</h1>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

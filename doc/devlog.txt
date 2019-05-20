@@ -143,6 +143,8 @@ aaronL -- 2019-05-20 13:32
 --------------------------------------------------------------
 - made certain register fields optional
 - register now works
+- added subsections for home page
+- updated nav links for logout
 ==============================================================
 
 firstL -- 2019-05-07 21:17
