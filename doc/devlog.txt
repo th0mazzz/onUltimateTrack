@@ -151,12 +151,13 @@ johnnyW & stefanT -- 2019-05-20 14:04
 --------------------------------------------------------------
 - worked on sending svg objects to python
 - organized how they would be stored in database on KtS
-- discussed how they would be sent from client to server and back 
+- discussed how they would be sent from client to server and back
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+thomasZ -- 2019-05-20 14:06
 --------------------------------------------------------------
--
+- added more methods to the database for altering user INFO
+- created the logout app.route that works
 ==============================================================
 
 firstL -- 2019-05-07 21:17

@@ -1,31 +1,30 @@
 import os, sqlite3
 
+#DIR = os.path.dirname(__file__)
+#DIR += '/'
+
+#DB_FILE = DIR + 'data/borkbook.db'
+
 DB_FILE = 'data/borkbook.db'
 
 def insert_test_data():
     '''INSERTS TEST DATA'''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-
     c.execute("INSERT INTO users VALUES(?,?,?,?,?,?,?,?)", ("useruno", "pass", "1,33", "johnny wong", 18, '''4'1"''', "9000lbs", 30))
     c.execute("INSERT INTO plays VALUES(?,?,?,?,?,?)", ("useruno", "i make big flayz", "", "useruno", "", "1"))
     c.execute("INSERT INTO teams VALUES(?,?,?,?)", ("team yeeters", "ultimate freesbi", "1", "useruno"))
-
     db.commit()
     db.close()
 
 
 def create_db():
     '''CREATES THE DATABASE WITH THE TABLES'''
-
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-
     c.execute("CREATE TABLE IF NOT EXISTS users(username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT)")
     c.execute("CREATE TABLE IF NOT EXISTS plays(creator TEXT, play_name TEXT, command_list TEXT, editor_list TEXT, viewer_list TEXT, team_ids INT)")
     c.execute("CREATE TABLE IF NOT EXISTS teams(team_name TEXT, sport TEXT, team_id INT PRIMARY KEY, team_admins TEXT)")
-
-
     db.commit()
     db.close()
 
@@ -52,23 +51,70 @@ def registerUser(username, password, player_name, player_age=0, player_height=0,
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-
     c.execute('INSERT INTO users VALUES (?,?,?,?,?,?,?,?)', (username, password, '', player_name, player_age, player_height, player_weight, player_jersey))
     #username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT
     db.commit()
     db.close()
-
     return True
 
 def changePlayerName(username, new_player_name):
+    '''
+    UPDATES THE PLAYER'S NAME GIVEN THE username AND THE new_player_name
+    '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-
     c.execute('UPDATE users SET player_name = (?) WHERE users.username = (?)', (new_player_name, username))
     #username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT
     db.commit()
     db.close()
+    return True
 
+def changePlayerAge(username, new_player_age):
+    '''
+    UPDATES THE PLAYER'S AGE GIVEN THE username AND THE new_player_name
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute('UPDATE users SET player_age = (?) WHERE users.username = (?)', (new_player_age, username))
+    #username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT
+    db.commit()
+    db.close()
+    return True
+
+def changePlayerHeight(username, new_player_height):
+    '''
+    UPDATES THE PLAYER'S HEIGHT GIVEN THE username AND THE new_player_height
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute('UPDATE users SET player_height = (?) WHERE users.username = (?)', (new_player_height, username))
+    #username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT
+    db.commit()
+    db.close()
+    return True
+
+def changePlayerWeight(username, new_player_weight):
+    '''
+    UPDATES THE PLAYER'S WEIGHT GIVEN THE username AND THE new_player_weight
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute('UPDATE users SET player_weight = (?) WHERE users.username = (?)', (new_player_weight, username))
+    #username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT
+    db.commit()
+    db.close()
+    return True
+
+def changePlayerJersey(username, new_player_jersey):
+    '''
+    UPDATES THE PLAYER'S JERSEY NUMBER GIVEN THE username AND THE new_player_jersey
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute('UPDATE users SET player_jersey = (?) WHERE users.username = (?)', (new_player_jersey, username))
+    #username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT
+    db.commit()
+    db.close()
     return True
 
 def createPlay(creator, play_name, command_list, editor_list, viewer_list, team_id):
@@ -119,10 +165,12 @@ def getTeamsByUser(username):
     return teamsUserIsOn
 
 def getRosterByTeamId(team_id):
+    '''
+    RETURNS ROSTER OF TEAM GIVEN THE TEAM ID
+    '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     userbase = c.execute('SELECT * FROM users')
-
     c.commit()
     c.close()
     return True
