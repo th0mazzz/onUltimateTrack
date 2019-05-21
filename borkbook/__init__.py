@@ -94,6 +94,15 @@ def create_team():
     database.createTeam(team, sport, session['username'])
     return redirect(url_for('home'))
 
+@app.route('/team', methods=['GET'])
+def team():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    id = request.args['team']
+    print(id)
+    name, sport= database.getNameByTeamId(id), database.getSportByTeamId(id)
+    return render_template('team.html', name=name, sport=sport)
+
 if __name__ == '__main__':
     app.debug = True
     app.run()

@@ -174,7 +174,19 @@ def getNameByTeamId(team_id):
     select = c.fetchone()
     db.commit()
     db.close()
-    return select
+    return select[0]
+
+def getSportByTeamId(team_id):
+    '''
+    RETURNS TEAM SPORT GIVEN TEAM_ID
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute('SELECT sport FROM teams WHERE team_id = ?', (team_id,))
+    select = c.fetchone()
+    db.commit()
+    db.close()
+    return select[0]
 
 def getPlaysByTeamId(team_id):
     '''

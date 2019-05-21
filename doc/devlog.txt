@@ -162,7 +162,7 @@ thomasZ -- 2019-05-20 14:06
 
 johnnyW -- 2019-05-20 23:26
 --------------------------------------------------------------
-- fixed absolute path issue for droplet in util/database.py
+- fixed absolute path issue for droplet in util/database.py (just kidding it broke)
 - removed unnecessary routes in __init__.py
 ==============================================================
 
@@ -170,6 +170,7 @@ johnnyW -- 2019-05-21 02:34
 --------------------------------------------------------------
 - added create team functionality on home page
 - apache server still can't open our database :(
+- added rough team page (drawing play is broken sadly)
 ==============================================================
 
 firstL -- 2019-05-07 21:17

@@ -16,9 +16,10 @@
                 <h1>Teams you're on</h1>
                 <!-- aaron should fix this to his liking -->
                 {% for team in teams %}
-                  <button class="btn">
-                    {{team[0]}}
-                  </button>
+
+                <a class="btn" href="{{'/team?team=' ~ teams[team]}}">
+                    {{team}}
+                </a>
                 {% endfor %}
             </div>
         </div>
