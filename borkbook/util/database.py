@@ -5,7 +5,8 @@ import os, sqlite3
 
 #DB_FILE = DIR + 'data/borkbook.db'
 
-DB_FILE = 'data/borkbook.db'
+DB_FILE = os.path.abspath("data/borkbook.db")
+
 
 def insert_test_data():
     '''INSERTS TEST DATA'''
@@ -29,7 +30,7 @@ def create_db():
     db.close()
 
     #insert_test_data()
-
+    print(DB_FILE)
     return True;
 
 def getUser(inputusername):
