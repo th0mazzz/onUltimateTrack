@@ -27,7 +27,16 @@ def register():
 
 @app.route('/home')
 def home():
-    return render_template('home.html', username = session['username'])
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    print(database.getTeamsByUser(session['username']))
+    teams = {}
+    for id in database.getTeamsByUser(session['username']):
+        print(id)
+        if len(id) > 1:
+            # change to tuple so it contains id and sport
+            teams[database.getNameByTeamId(id)] = (id)
+    return render_template('home.html', username = session['username'], teams= teams)
 
 @app.route('/logout')
 def logout():
@@ -54,7 +63,6 @@ def auth():
 
 @app.route('/auth2', methods=['POST'])
 def auth2():
-
     user, pwd = request.form['username'], request.form['password']
     confirmpwd = request.form['confirmpassword']
     returnedStuff = database.getUser(user)
@@ -78,6 +86,13 @@ def auth2():
     flash('Username is taken')
     return redirect(url_for('register'))
 
+@app.route('/create_team', methods=['POST'])
+def create_team():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    team, sport = request.form['teamname'], request.form['sport']
+    database.createTeam(team, sport, session['username'])
+    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     app.debug = True

@@ -7,19 +7,59 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1 class="display-3 text-primary"> welcome {{username}} </h1>
+                <h1 class="display-3 text-primary"> Welcome {{username}} </h1>
             </div>
         </div>
         <hr>
         <div class="row mt-1">
             <div class="col">
                 <h1>Teams you're on</h1>
+                <!-- aaron should fix this to his liking -->
+                {% for team in teams %}
+                  <button class="btn">
+                    {{team[0]}}
+                  </button>
+                {% endfor %}
             </div>
         </div>
         <hr>
         <div class="row mt-1">
             <div class="col">
                 <h1>Teams you're coaching</h1>
+
+            </div>
+        </div>
+        <div id="accordion" class="mb-4">
+            <div class="card m-3">
+              <div class="card-header" id="createTeam" data-toggle="collapse" data-target="#createTeamForm" aria-expanded="true" aria-controls="createTeamForm">
+                <h5 class="text-center">
+                    Create a Team
+                </h5>
+              </div>
+              <div id="createTeamForm" class="collapse" aria-labelledby="createTeam">
+                <div class="card-body">
+                  <form action="/create_team" method="POST">
+                      <div class="form-group">
+                          <label for="teamname">Team Name</label>
+                          <input type="text" class="form-control" id="user" aria-describedby="emailHelp"
+                              placeholder="Enter team name" name="teamname" required>
+                      </div>
+                      <div class="form-group">
+                          <label for="sport">Sport</label>
+                          <select class="form-control" id="sport" name="sport">
+                            <!--Use a for loop with jinja to create selection list LATER-->
+                            <option>Basketball</option>
+                            <option>Ultimate Frisbee</option>
+                          </select>
+                      </div>
+                      <div class="row">
+                          <div class="col text-center">
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                          </div>
+                      </div>
+                  </form>
+                </div>
+              </div>
             </div>
         </div>
     </div>

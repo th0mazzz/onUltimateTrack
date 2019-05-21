@@ -14,4 +14,4 @@ db.close()
 print(selectedVal)
 '''
 
-print(database.getTeamsByUser('useruno'))
+print(database.getTeamsByUser('a'))

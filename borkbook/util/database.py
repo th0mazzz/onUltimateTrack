@@ -1,4 +1,4 @@
-import os, sqlite3
+import os, sqlite3, uuid
 
 #DIR = os.path.dirname(__file__)
 #DIR += '/'
@@ -125,23 +125,56 @@ def createPlay(creator, play_name, command_list, editor_list, viewer_list, team_
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     c.execute('INSERT INTO plays VALUES (?,?,?,?,?,?)', (creator, play_name, command_list, editor_list, viewer_list, team_id))
-    c.commit()
-    c.close()
+    db.commit()
+    db.close()
     return True
 
 def editPlay(play_name, team_id):
     return 'WILL BE IMPLEMETED IN THE FUTURE'
 
-def createTeam(team_name, sport, team_id, team_admins):
+def createTeam(team_name, sport, team_admin):
     '''
     CREATES TEAM AND INSERTS INTO THE DATABASE
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    c.execute('INSERT INTO teams VALUES (?,?,?,?)', (team_name, sport, team_id, team_admins))
-    c.commit()
-    c.close()
+    team_id = str(uuid.uuid4())
+    c.execute('INSERT INTO teams VALUES (?,?,?,?)', (team_name, sport, team_id, team_admin))
+    db.commit()
+    db.close()
+    addTeamToUser(team_admin, team_id)
     return True
+
+
+def addTeamToUser(username, team_id):
+    '''
+    INSERT TEAM ID TO CORRESPONDING USERNAME
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    if len(getTeamsByUser(username)) < 1:
+        # this is the user's first team
+        # delimit each team_id by a comma
+        c.execute('UPDATE users SET team_ids = ? WHERE username = ?', (team_id + ",", username))
+    else:
+        # the user is part of other teams
+        prevIDS = ",".join(getTeamsByUser(username))
+        c.execute('UPDATE users SET team_ids = ? WHERE username = ?', (prevIDS + ",{}".format(team_id), username))
+    db.commit()
+    db.close()
+    return True
+
+def getNameByTeamId(team_id):
+    '''
+    RETURNS TEAM NAME GIVEN TEAM_ID
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute('SELECT team_name FROM teams WHERE team_id = ?', (team_id,))
+    select = c.fetchone()
+    db.commit()
+    db.close()
+    return select
 
 def getPlaysByTeamId(team_id):
     '''
@@ -150,8 +183,8 @@ def getPlaysByTeamId(team_id):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     plays = c.execute('SELECT * FROM plays WHERE plays.team_id = ?', (team_id,))
-    c.commit()
-    c.close()
+    db.commit()
+    db.close()
     return plays
 
 def getTeamsByUser(username):
@@ -162,7 +195,7 @@ def getTeamsByUser(username):
     #print(userInfo)
     teamsUserIsOn = userInfo[2]
     teamsUserIsOn = teamsUserIsOn.split(',')
-    teamsUserIsOn = [int(x) for x in teamsUserIsOn]
+    teamsUserIsOn = [x for x in teamsUserIsOn]
     return teamsUserIsOn
 
 def getRosterByTeamId(team_id):
@@ -172,6 +205,6 @@ def getRosterByTeamId(team_id):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     userbase = c.execute('SELECT * FROM users')
-    c.commit()
-    c.close()
+    db.commit()
+    db.close()
     return True
