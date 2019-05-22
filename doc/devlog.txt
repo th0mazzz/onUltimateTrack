@@ -173,9 +173,10 @@ johnnyW -- 2019-05-21 02:34
 - added rough team page (drawing play is broken sadly)
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+johnnyW -- 2019-05-21 23:53
 --------------------------------------------------------------
--
+- gave thomasZ, stefanT, and aaronL access to droplet using
+- public ssh keys on their github through command `ssh-import-id gh:<github username>`
 ==============================================================
 
 firstL -- 2019-05-07 21:17
