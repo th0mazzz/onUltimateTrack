@@ -184,9 +184,11 @@ thomasZ -- 2019-05-22 00:58
 - Updated the design document (new diagrams, new info)
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+thomasZ -- 2019-05-23 14:13
 --------------------------------------------------------------
--
+- Fixed some url_redirects when username does not exist in login
+- Fixed getPlaysByTeamId in database.py
+- Started a plays.html
 ==============================================================
 
 firstL -- 2019-05-07 21:17
