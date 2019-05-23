@@ -194,7 +194,8 @@ def getPlaysByTeamId(team_id):
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    plays = c.execute('SELECT * FROM plays WHERE plays.team_id = ?', (team_id,))
+    c.execute('SELECT * FROM plays WHERE plays.team_ids = ?', (team_id,))
+    plays = c.fetchall()
     db.commit()
     db.close()
     return plays

@@ -52,12 +52,12 @@ def auth():
     returnedStuff = database.getUser(user)
     if returnedStuff == None:
         flash('Incorrect username!')
-        return redirect(url_for('login'))
+        return redirect(url_for('landing'))
         print(returnedStuff)
 
     if pwd != returnedStuff[1]:
         flash('Incorrect password!')
-        return redirect(url_for('login'))
+        return redirect(url_for('landing'))
     session['username'] = user
     return redirect(url_for('home'))
 
@@ -101,7 +101,8 @@ def team():
     id = request.args['team']
     print(id)
     name, sport= database.getNameByTeamId(id), database.getSportByTeamId(id)
-    return render_template('team.html', name=name, sport=sport)
+    plays = database.getPlaysByTeamId(id)
+    return render_template('team.html', name=name, sport=sport, plays=plays)
 
 if __name__ == '__main__':
     app.debug = True
