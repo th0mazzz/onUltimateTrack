@@ -86,14 +86,16 @@ def auth2():
     flash('Username is taken')
     return redirect(url_for('register'))
 
-@app.route('/account', methods=['POST'])
+@app.route('/account', methods=['GET'])
 def account():
-    if username not in session:
+    if 'username' not in session:
         return redirect(url_for('landing'))
     username = session['username']
     userInfo = database.getUser(username)
     #(username, password, team_ids, player_name, player_age, player_height, player_weight, player_jersey)
-    return render_template('account.html', name = username)
+    print(userInfo)
+    name, age, height, weight, jersey = userInfo[3], userInfo[4], userInfo[5], userInfo[6], userInfo[7]
+    return render_template('account.html', username = username, name = name, age = age, height = height, weight = weight, jersey = jersey)
 
 
 @app.route('/create_team', methods=['POST'])
@@ -112,6 +114,7 @@ def team():
     print(id)
     name, sport= database.getNameByTeamId(id), database.getSportByTeamId(id)
     plays = database.getPlaysByTeamId(id)
+    return render_template('team.html')
 
 if __name__ == '__main__':
     app.debug = True
