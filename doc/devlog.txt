@@ -203,9 +203,11 @@ thomasZ -- 2019-05-24 14:05
 - Made a basic account page
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+stefanT -- 2019-05-25 21:15
 --------------------------------------------------------------
--
+- Identified issue involving the line drawing as play.css was
+  not linked properly to the HTML.
+- Added link for play.css to the HTML to fix the issue. 
 ==============================================================
 
 firstL -- 2019-05-07 21:17
