@@ -60,7 +60,7 @@ def registerUser(username, password, player_name, player_age=0, player_height=0,
 
 def changePlayerName(username, new_player_name):
     '''
-    UPDATES THE PLAYER'S NAME GIVEN THE username AND THE new_player_name
+    UPDATES THE PLAYERS NAME GIVEN THE username AND THE new_player_name
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -72,7 +72,7 @@ def changePlayerName(username, new_player_name):
 
 def changePlayerAge(username, new_player_age):
     '''
-    UPDATES THE PLAYER'S AGE GIVEN THE username AND THE new_player_name
+    UPDATES THE PLAYERS AGE GIVEN THE username AND THE new_player_name
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -84,7 +84,7 @@ def changePlayerAge(username, new_player_age):
 
 def changePlayerHeight(username, new_player_height):
     '''
-    UPDATES THE PLAYER'S HEIGHT GIVEN THE username AND THE new_player_height
+    UPDATES THE PLAYERS HEIGHT GIVEN THE username AND THE new_player_height
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -96,7 +96,7 @@ def changePlayerHeight(username, new_player_height):
 
 def changePlayerWeight(username, new_player_weight):
     '''
-    UPDATES THE PLAYER'S WEIGHT GIVEN THE username AND THE new_player_weight
+    UPDATES THE PLAYERS WEIGHT GIVEN THE username AND THE new_player_weight
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -108,7 +108,7 @@ def changePlayerWeight(username, new_player_weight):
 
 def changePlayerJersey(username, new_player_jersey):
     '''
-    UPDATES THE PLAYER'S JERSEY NUMBER GIVEN THE username AND THE new_player_jersey
+    UPDATES THE PLAYERS JERSEY NUMBER GIVEN THE username AND THE new_player_jersey
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -194,7 +194,7 @@ def getPlaysByTeamId(team_id):
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    c.execute('SELECT * FROM plays WHERE plays.team_ids = ?', (team_id,))
+    c.execute('SELECT * FROM plays WHERE plays.team_ids = ?', (str(team_id),))
     plays = c.fetchall()
     db.commit()
     db.close()

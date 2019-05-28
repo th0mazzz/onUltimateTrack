@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %} Borkbook | Pocket Playbook {% endblock %}
+<!--
+<link rel="stylesheet" href="{{ url_for('static', filename='play.css') }}">
+-->
+{% block body %}
+<div class="container-fluid bg-light mt-0">
+    <div class="container">
+        <div class="row">
+          <h1> {{name}} </h1>
+        </div>
+        <div class="row">
+          <h3> {{sport}} </h3>
+        </div>
+        <div class="row">
+            Play demo
+        </div>
+        <button id="save" class="btn">Save</button>
+        <div id="sketch" class="bg-white"></div>
+        <div id="output"></div>
+    </div>
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="{{url_for('static', filename='play.js')}}"></script>
+</div>
+{% endblock %}

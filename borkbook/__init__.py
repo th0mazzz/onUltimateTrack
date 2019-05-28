@@ -113,8 +113,16 @@ def team():
     id = request.args['team']
     print(id)
     name, sport= database.getNameByTeamId(id), database.getSportByTeamId(id)
+    return render_template('team.html', teamID = id)
+
+@app.route('/teamplays', methods=['GET'])
+def teamplays():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    id = request.args['team']
     plays = database.getPlaysByTeamId(id)
-    return render_template('team.html')
+    print(plays)
+    return render_template('teamplays.html', plays = plays)
 
 if __name__ == '__main__':
     app.debug = True
