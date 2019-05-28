@@ -164,6 +164,17 @@ def addTeamToUser(username, team_id):
     db.close()
     return True
 
+def addPlayToTeam(creator, play_name, command_list, editor_list, viewer_list, team_id):
+    """
+    ADDS PLAY TO GIVEN TEAM
+    creator TEXT, play_name TEXT, command_list TEXT, editor_list TEXT, viewer_list TEXT, team_ids INT
+    """
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute('INSERT INTO plays VALUES(?,?,?,?,?,?)', (creator, play_name, command_list, editor_list, viewer_list, team_id))
+    db.commit()
+    db.close()
+
 def getNameByTeamId(team_id):
     '''
     RETURNS TEAM NAME GIVEN TEAM_ID

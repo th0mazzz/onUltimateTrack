@@ -6,15 +6,12 @@
 {% block body %}
 <div class="container-fluid bg-light mt-0">
     <div class="container">
-
-        {% for play in plays %}
-        <div class="row">
-          <text>{{play}}</text>
-        </div>
-
-
-        {% endfor %}
-
+        <form action="/writePlay">
+            <input type="text" name="playname" placeholder="Name of play"></input> <br>
+            <input type="hidden" name="team" value={{teamID}}>
+            <text> there gonna be some svg thingie here, or you can edit it later or something </text>
+            <input type="submit"></input>
+        </form>
     </div>
 
     <script src="http://d3js.org/d3.v3.min.js"></script>

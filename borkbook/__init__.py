@@ -19,8 +19,10 @@ database.create_db()
 
 @app.route('/')
 def landing():
-    return render_template('login.html')
-
+    if 'username' not in session:
+        return render_template('login.html')
+    return redirect(url_for('home'))
+    
 @app.route('/register')
 def register():
     return render_template('register.html')
@@ -119,10 +121,27 @@ def team():
 def teamplays():
     if 'username' not in session:
         return redirect(url_for('landing'))
+    print(request.args)
     id = request.args['team']
     plays = database.getPlaysByTeamId(id)
     print(plays)
     return render_template('teamplays.html', plays = plays)
+
+@app.route('/createplay', methods=['GET'])
+def createplay():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    id = request.args['team']
+    return render_template('createplay.html', teamID = id)
+
+@app.route('/writePlay', methods=['GET'])
+def writePlay():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    id = request.args['team']
+    playname = request.args['playname']
+    database.addPlayToTeam(session['username'], playname, '', session['username'], '', id)
+    return redirect(url_for('teamplays', team = id))
 
 if __name__ == '__main__':
     app.debug = True
