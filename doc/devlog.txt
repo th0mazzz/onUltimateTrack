@@ -207,7 +207,7 @@ stefanT -- 2019-05-25 21:15
 --------------------------------------------------------------
 - Identified issue involving the line drawing as play.css was
   not linked properly to the HTML.
-- Added link for play.css to the HTML to fix the issue. 
+- Added link for play.css to the HTML to fix the issue.
 ==============================================================
 
 thomasZ -- 2019-05-28 14:52
@@ -234,9 +234,16 @@ thomasZ -- 2019-05-29 12:39
 - Need to alter the database schema
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+johnnyW -- 2019-05-29 13:00
 --------------------------------------------------------------
--
+- Changed team dictionary to a list of lists for each team on home page 
+==============================================================
+
+aaronL -- 2019-05-29 13:08
+--------------------------------------------------------------
+- properly set up bootstrap cards
+- have 4 cards in each row
+- fixed jinja
 ==============================================================
 
 firstL -- 2019-05-07 21:17

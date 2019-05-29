@@ -23,6 +23,38 @@
                 {% endfor %}
             </div>
         </div>
+        <div class="row mt-5 ml-4">
+            <div class="col mt-4">
+                <h1>Teams You're On</h1>
+            </div>
+        </div>
+
+        {% if teams|length == 0 %}
+        <p class="mt-2 mr-5 ml-5 mb-5" style="color: red;">You aren't enrolled in any classes. Go enroll in one!</p>
+        {% else %}
+        {% for i in range((teams|length // 4) + 1) %}
+        <!-- Row stuff -->
+        <div class="row mt-3 ml-3 mr-3">
+            {% for j in teams[i * 4: i * 4 + 4] %}
+            <div class="col-md-3">
+                <div class="card mr-2 ml-2" style="width: 100%;">
+                    <a href="{{'/team?team=' ~ [j][i][1] }}">
+                        <div class="card-img-caption">
+                            <p id="caption-text2" class="card-text">{{ [j][i][0] }}</p>
+                            <!-- <img class="card-img-top" src="../static/card_background2.jpeg" alt="Card image cap"> -->
+                        </div>
+                    </a>
+
+                    <div class="card-body">
+                        <h5 class="card-title">Course Description</h5>
+                        <p class="card-text">sadf</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        {% endif %}
         <hr>
         <div class="row mt-1">
             <div class="col">
@@ -32,35 +64,36 @@
         </div>
         <div id="accordion" class="mb-4">
             <div class="card m-3">
-              <div class="card-header" id="createTeam" data-toggle="collapse" data-target="#createTeamForm" aria-expanded="true" aria-controls="createTeamForm">
-                <h5 class="text-center">
-                    Create a Team
-                </h5>
-              </div>
-              <div id="createTeamForm" class="collapse" aria-labelledby="createTeam">
-                <div class="card-body">
-                  <form action="/create_team" method="POST">
-                      <div class="form-group">
-                          <label for="teamname">Team Name</label>
-                          <input type="text" class="form-control" id="user" aria-describedby="emailHelp"
-                              placeholder="Enter team name" name="teamname" required>
-                      </div>
-                      <div class="form-group">
-                          <label for="sport">Sport</label>
-                          <select class="form-control" id="sport" name="sport">
-                            <!--Use a for loop with jinja to create selection list LATER-->
-                            <option>Basketball</option>
-                            <option>Ultimate Frisbee</option>
-                          </select>
-                      </div>
-                      <div class="row">
-                          <div class="col text-center">
-                              <button type="submit" class="btn btn-primary">Submit</button>
-                          </div>
-                      </div>
-                  </form>
+                <div class="card-header" id="createTeam" data-toggle="collapse" data-target="#createTeamForm"
+                    aria-expanded="true" aria-controls="createTeamForm">
+                    <h5 class="text-center">
+                        Create a Team
+                    </h5>
                 </div>
-              </div>
+                <div id="createTeamForm" class="collapse" aria-labelledby="createTeam">
+                    <div class="card-body">
+                        <form action="/create_team" method="POST">
+                            <div class="form-group">
+                                <label for="teamname">Team Name</label>
+                                <input type="text" class="form-control" id="user" aria-describedby="emailHelp"
+                                    placeholder="Enter team name" name="teamname" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="sport">Sport</label>
+                                <select class="form-control" id="sport" name="sport">
+                                    <!--Use a for loop with jinja to create selection list LATER-->
+                                    <option>Basketball</option>
+                                    <option>Ultimate Frisbee</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

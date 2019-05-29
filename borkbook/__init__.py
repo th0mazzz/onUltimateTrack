@@ -32,12 +32,11 @@ def home():
     if 'username' not in session:
         return redirect(url_for('landing'))
     print(database.getTeamsByUser(session['username']))
-    teams = {}
+    teams = []
     for id in database.getTeamsByUser(session['username']):
         print(id)
         if len(id) > 1:
-            # change to tuple so it contains id and sport
-            teams[database.getNameByTeamId(id)] = (id)
+            teams.append([database.getNameByTeamId(id), id, database.getSportByTeamId(id)])
     return render_template('home.html', username = session['username'], teams= teams)
 
 @app.route('/logout')
