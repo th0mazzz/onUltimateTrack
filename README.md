@@ -3,16 +3,16 @@
 For the Ultimate Track team :sunglasses:
 
 ## Roles
-Thomas Zhao
+### Thomas Zhao
 * Project Manager
 * Database Manager (SQLite)
-Xiaojie (Aaron) Li
+### Xiaojie (Aaron) Li
 * Frontend Developer (HTML, CSS)
 * App Developer (app.py, Python)
-Stefan Tan
+### Stefan Tan
 * SVG Manipulator (SVG, JavaScript)
 * App Developer (app.py, Python) 
-Johnny Wong
+### Johnny Wong
 * Database Manager (SQLite)
 * SVG Manipulator (SVG, JavaScript)
 
