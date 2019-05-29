@@ -14,7 +14,7 @@
         <div class="row">
           {% for play in plays %}
           <div class="col md">
-            <a class="btn" href={{'/play?team={{teamID}}&playname={{play[1]}}'}}>{{play[1]}}, by {{play[0]}}</a>
+            <a class="btn" href="{{'/play?team=' ~ teamID ~ '&play=' ~ play[5]}}">{{play[1]}}, by {{play[0]}}</a>
           </div>
           {% endfor %}
         </div>

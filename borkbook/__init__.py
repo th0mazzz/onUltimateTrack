@@ -143,6 +143,12 @@ def writePlay():
     database.createPlay(session['username'], playname, '', session['username'], id)
     return redirect(url_for('teamplays', team = id))
 
+@app.route('/play')
+def play():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    return render_template('play.html')
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
