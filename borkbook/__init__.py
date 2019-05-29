@@ -141,7 +141,7 @@ def writePlay():
         return redirect(url_for('landing'))
     id = request.args['team']
     playname = request.args['playname']
-    database.addPlayToTeam(session['username'], playname, '', session['username'], '', id)
+    database.createPlay(session['username'], playname, '', session['username'], id)
     return redirect(url_for('teamplays', team = id))
 
 if __name__ == '__main__':

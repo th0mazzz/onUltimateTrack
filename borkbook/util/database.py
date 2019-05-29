@@ -7,7 +7,7 @@ import os, sqlite3, uuid
 
 DB_FILE = os.path.abspath("data/borkbook.db")
 
-
+#method not accurate with schema no more
 def insert_test_data():
     '''INSERTS TEST DATA'''
     db = sqlite3.connect(DB_FILE)
@@ -24,8 +24,8 @@ def create_db():
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS users(username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT)")
-    c.execute("CREATE TABLE IF NOT EXISTS plays(creator TEXT, play_name TEXT, command_list TEXT, editor_list TEXT, team_ids TEXT)")
-    c.execute("CREATE TABLE IF NOT EXISTS teams(team_name TEXT, sport TEXT, team_id INT PRIMARY KEY, team_admins TEXT)")
+    c.execute("CREATE TABLE IF NOT EXISTS plays(creator TEXT, play_name TEXT, command_list TEXT, editor_list TEXT, team_ids TEXT, play_id TEXT PRIMARY KEY)")
+    c.execute("CREATE TABLE IF NOT EXISTS teams(team_name TEXT, sport TEXT, team_id TEXT PRIMARY KEY, team_admins TEXT)")
     db.commit()
     db.close()
 
@@ -118,13 +118,14 @@ def changePlayerJersey(username, new_player_jersey):
     db.close()
     return True
 
-def createPlay(creator, play_name, command_list, editor_list, viewer_list, team_id):
+def createPlay(creator, play_name, command_list, editor_list, team_id):
     '''
     CREATES A PLAY AND INSERTS INTO THE DATABASE
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    c.execute('INSERT INTO plays VALUES (?,?,?,?,?,?)', (creator, play_name, command_list, editor_list, viewer_list, team_id))
+    playid = str(uuid.uuid4())
+    c.execute('INSERT INTO plays VALUES (?,?,?,?,?,?)', (creator, play_name, command_list, editor_list, team_id, playid))
     db.commit()
     db.close()
     return True
@@ -163,17 +164,6 @@ def addTeamToUser(username, team_id):
     db.commit()
     db.close()
     return True
-
-def addPlayToTeam(creator, play_name, command_list, editor_list, viewer_list, team_id):
-    """
-    ADDS PLAY TO GIVEN TEAM
-    creator TEXT, play_name TEXT, command_list TEXT, editor_list TEXT, viewer_list TEXT, team_ids INT
-    """
-    db = sqlite3.connect(DB_FILE)
-    c = db.cursor()
-    c.execute('INSERT INTO plays VALUES(?,?,?,?,?,?)', (creator, play_name, command_list, editor_list, viewer_list, team_id))
-    db.commit()
-    db.close()
 
 def getNameByTeamId(team_id):
     '''
