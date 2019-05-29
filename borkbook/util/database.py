@@ -218,7 +218,24 @@ def getRosterByTeamId(team_id):
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    userbase = c.execute('SELECT * FROM users')
+    userbase = c.execute('SELECT player_name, team_ids FROM users')
+    userbase = userbase.fetchall()
+    newUserbase = []
+    for playerInfo in userbase:
+        #playerInfo[0] is player_name
+        #playerInfo[1] is teams, comma separated
+        teamIDs = playerInfo[1]
+        teamIDs = teamIDs.split(',')
+        teamIDs.remove('')
+        newUserbase.append((playerInfo[0], teamIDs))
+
+    roster = []
+    for player in newUserbase:
+        if team_id in player[1]:
+            roster.append(player[0])
+
+    #print('this is the userbase')
+    print(newUserbase)
     db.commit()
     db.close()
-    return True
+    return roster

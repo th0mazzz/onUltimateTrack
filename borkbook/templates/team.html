@@ -12,8 +12,12 @@
             <div class="col">
                 <a href="{{'/createplay?team=' ~ teamID}}"><button class="btn btn-primary">Create a Play</button></a>
             </div>
-
         </div>
+        <div class="row">
+          <h2>Roster</h2>
+        </div>
+        {{roster}}
+
     </div>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="{{url_for('static', filename='play.js')}}"></script>
