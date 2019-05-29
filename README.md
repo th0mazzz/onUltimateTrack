@@ -45,9 +45,9 @@ $ python3 -m venv name
 10. Register if you are a new user or login if you are an existing user and enjoy our web application! 
 
 ## Dependencies:
-* Flask==1.0.2
+* Flask==1.0.2  
    Used as the framework for the app.
-* Jinja2==2.10
+* Jinja2==2.10  
    Template engine for Python.  
 
 1. Install the dependencies listed above by typing ```(venv)$pip install -r <path-to-file>requirements.txt``` in your terminal.
