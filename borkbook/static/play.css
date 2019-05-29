@@ -6,8 +6,8 @@ svg {
 
 .line {
   cursor: crosshair;
-  fill: yellow;
-  stroke: yellow;
+  fill: none;
+  stroke: black;
   stroke-width: .1px;
   stroke-linejoin: round;
 }
