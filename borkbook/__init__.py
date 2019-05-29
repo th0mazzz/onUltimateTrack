@@ -22,7 +22,7 @@ def landing():
     if 'username' not in session:
         return render_template('login.html')
     return redirect(url_for('home'))
-    
+
 @app.route('/register')
 def register():
     return render_template('register.html')
@@ -123,9 +123,10 @@ def teamplays():
         return redirect(url_for('landing'))
     print(request.args)
     id = request.args['team']
+    teamname = database.getNameByTeamId(id)
     plays = database.getPlaysByTeamId(id)
     print(plays)
-    return render_template('teamplays.html', plays = plays)
+    return render_template('teamplays.html', plays = plays, teamname = teamname, teamID = id)
 
 @app.route('/createplay', methods=['GET'])
 def createplay():

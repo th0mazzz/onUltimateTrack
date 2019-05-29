@@ -224,13 +224,14 @@ thomasZ -- 2019-05-28 15:36
 johnnyW -- 2019-05-28 13:58
 --------------------------------------------------------------
 - Remove fill color in play.css to be able to draw basic lines
-- in play.html
+in play.html
 - Still unable to run app on droplet when accessing db methods
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+thomasZ -- 2019-05-29 12:39
 --------------------------------------------------------------
--
+- Plays show up more nicely, no SVG
+- Need to alter the database schema
 ==============================================================
 
 firstL -- 2019-05-07 21:17
