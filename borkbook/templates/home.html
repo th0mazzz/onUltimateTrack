@@ -11,18 +11,6 @@
             </div>
         </div>
         <hr>
-        <div class="row mt-1">
-            <div class="col">
-                <h1>Teams you're on</h1>
-                <!-- aaron should fix this to his liking -->
-                {% for team in teams %}
-
-                <a class="btn" href="{{'/team?team=' ~ teams[team]}}">
-                    {{team}}
-                </a>
-                {% endfor %}
-            </div>
-        </div>
         <div class="row mt-5 ml-4">
             <div class="col mt-4">
                 <h1>Teams You're On</h1>
@@ -37,11 +25,18 @@
         <div class="row mt-3 ml-3 mr-3">
             {% for j in teams[i * 4: i * 4 + 4] %}
             <div class="col-md-3">
-                <div class="card mr-2 ml-2" style="width: 100%;">
+                <a href="{{'/team?team=' ~ [j][i][1] }}" style="text-decoration: none;">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h4 class="card-title" style="color: black; text-decoration: underline;">{{ [j][i][0] }}</h4>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ [j][i][2] }}</h6>
+                        </div>
+                    </div>
+                </a>
+                <!-- <div class="card mr-2 ml-2" style="width: 100%;">
                     <a href="{{'/team?team=' ~ [j][i][1] }}">
                         <div class="card-img-caption">
                             <p id="caption-text2" class="card-text">{{ [j][i][0] }}</p>
-                            <!-- <img class="card-img-top" src="../static/card_background2.jpeg" alt="Card image cap"> -->
                         </div>
                     </a>
 
@@ -49,14 +44,14 @@
                         <h5 class="card-title">Course Description</h5>
                         <p class="card-text">sadf</p>
                     </div>
-                </div>
+                </div> -->
             </div>
             {% endfor %}
         </div>
         {% endfor %}
         {% endif %}
         <hr>
-        <div class="row mt-1">
+        <div class="row mt-1 ml-3 mr-3">
             <div class="col">
                 <h1>Teams you're coaching</h1>
 
