@@ -277,6 +277,8 @@ aaronL -- 2019-05-30 13:37
 --------------------------------------------------------------
 - finished bootstrap cards, 4 cards per row
 - added appropriate css
+- fix my db
+- changed some headings
 ==============================================================
 
 thomasZ -- 2019-05-30 13:57
