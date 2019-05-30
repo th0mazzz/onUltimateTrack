@@ -20,12 +20,16 @@ database.create_db()
 @app.route('/')
 def landing():
     if 'username' not in session:
-        return render_template('login.html')
+        return render_template('login.html', loggedin = "nope")
     return redirect(url_for('home'))
+
+@app.route('/aboutus')
+def aboutus():
+    return render_template('aboutus.html', loggedin = "nope")
 
 @app.route('/register')
 def register():
-    return render_template('register.html')
+    return render_template('register.html', loggedin = "nope")
 
 @app.route('/home')
 def home():

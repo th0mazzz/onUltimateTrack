@@ -286,9 +286,12 @@ thomasZ -- 2019-05-30 13:57
 - Can view other players profiles now
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+thomasZ -- 2019-05-30 14:30
 --------------------------------------------------------------
--
+- Removed plays and team links from navbar
+- Altered the nav bar to display different things appropriate to context
+  depending if logged in or not
+- Added an aboutus.html heh
 ==============================================================
 
 firstL -- 2019-05-07 21:17
