@@ -6,13 +6,15 @@
 {% block body %}
 <div class="container-fluid bg-light mt-0">
     <div class="container">
-        <form action="/writePlay">
-            <input type="text" name="playname" placeholder="Name of play"></input> <br>
-            <input type="hidden" name="team" value={{teamID}}>
-            <input type="submit"></input>
-            <div id="sketch"></div>
-            <div id="output"></div>
-        </form>
+      <div class="row">
+        <input class=id="playname" type="text" name="playname" placeholder="Name of play"></input>
+       <!-- Pls fix aaron-->
+      </div>
+      <input id="id" type="hidden" name="team" value={{teamID}}>
+      <div id="sketch"></div>
+
+      <div id="output"></div>
+      <button class="btn text-warning" id="submit">Submit Play</button>
 
     </div>
 

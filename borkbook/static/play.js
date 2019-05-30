@@ -16,7 +16,7 @@ var getSVGObjects = function(){
 }
 
 
-var yeet = function(){
+var sendSVGObjects = function(){
   var dataRows = getSVGObjects();
   var xhttp = new XMLHttpRequest();
   var query = "?";
@@ -26,10 +26,13 @@ var yeet = function(){
   });
 
   console.log(query);
-  xhttp.open("GET", "/yeet" + query, true);
+  xhttp.open("GET", "/receiveObjects" + query, true);
   xhttp.send();
 
 }
+
+var saveBtn = document.getElementById('submit')
+saveBtn.addEventListener('click', sendSVGObjects)
 
 //save.addEventListener('click',yeet)
 
