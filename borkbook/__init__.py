@@ -161,6 +161,13 @@ def play():
         return redirect(url_for('landing'))
     return render_template('play.html')
 
+@app.route('/receiveObjects')
+def receiveObjects():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    print(request.args)
+    return redirect(url_for('landing'))
+
 if __name__ == '__main__':
     app.debug = True
     app.run()
