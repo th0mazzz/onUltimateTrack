@@ -261,9 +261,10 @@ by teamID
 - Website now should display team roster on team.html
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+stefanT -- 2019-05-29 21:26
 --------------------------------------------------------------
--
+- Worked on and updated README.md
+- Currently working on implementing circles into svg.
 ==============================================================
 
 firstL -- 2019-05-07 21:17
