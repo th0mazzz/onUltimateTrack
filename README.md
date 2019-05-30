@@ -20,9 +20,9 @@ For the Ultimate Track team :sunglasses:
 TL;DR: Playbook for teams of any sport!  
 Borkbook is a web-based application that aids teams by organizing their playbooks, rosters, and game stats. It would be helpful for teams to better communicate and explain plays through visuals (created using SVG and stored in a database) while making them easily accessible and editable by the creator and team admin.
 
-## Instructions to Run:
+## Launch Instructions:
 Click this link to go to our website: [Live Link](http://167.99.145.123/)
-### To Run Locally:
+### To Install and run on localhost:
 1. Open a terminal session.
 2. Create your own environment by typing (name is a placeholder for the name of the virtual environment of your choosing):
 ```
@@ -42,7 +42,19 @@ $ python3 -m venv name
 ```
 
 9. Open a web browser and navigate to the link http://127.0.0.1:5000/.
-10. Register if you are a new user or login if you are an existing user and enjoy our web application! 
+10. Register if you are a new user or login if you are an existing user and enjoy our web application!
+
+### To Install and run on Apache2:
+1. SSH into your droplet by entering ```ssh <user>@<ip address>``` into your terminal.
+2. Grant yourself sudo acess by entering '''sudo su''' into your terminal. 
+3. Move to the directory where the project will be located by entering ```cd /var/www/```. Then create a directory for the project by typing ```mkdir borkbook``` and after ```cd borkbook```.
+4. Clone the repo ```$ git clone https://github.com/th0mazzz/onUltimateTrack.git```.
+5. Change the permissions by entering ```chgrp -R www-data ccereal``` and ```chmod -R g+w ccereal```.
+6. Install all the dependencies needed by typing ```$pip install -r <path-to-file>requirements.txt```.
+7. Move the .conf file to the site-enabled directory by typing ```$ mv borkbook/borkbook.conf ~/etc/apache2/sites-enabled/```.
+8. Enable the site by entering ```a2ensite borkbook```. 
+9. Either reload or restart the apache2 server by typing ```service apache2 reload``` or ```service apache2 restart```. 
+10. Enter your ip address into your browser and enjoy our web application!
 
 ## Dependencies:
 * Flask==1.0.2  
