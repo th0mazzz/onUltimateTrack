@@ -8,7 +8,7 @@ svg {
   cursor: crosshair;
   fill: none;
   stroke: black;
-  stroke-width: .1px;
+  stroke-width: 5px;
   stroke-linejoin: round;
 }
 

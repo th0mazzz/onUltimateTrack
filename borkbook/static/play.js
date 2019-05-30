@@ -31,7 +31,7 @@ var yeet = function(){
 
 }
 
-save.addEventListener('click',yeet)
+//save.addEventListener('click',yeet)
 
 // based on http://bl.ocks.org/cloudshapes/5661984 by cloudshapes
 
@@ -54,7 +54,7 @@ var line = d3.svg.line()
     .x(function(d, i) { return d.x; })
     .y(function(d, i) { return d.y; });
 
-var svg = d3.select("#sketch").append("svg")
+var svg = d3.select("#sketch").append('svg')
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
 

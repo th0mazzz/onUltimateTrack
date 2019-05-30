@@ -236,7 +236,7 @@ thomasZ -- 2019-05-29 12:39
 
 johnnyW -- 2019-05-29 13:00
 --------------------------------------------------------------
-- Changed team dictionary to a list of lists for each team on home page 
+- Changed team dictionary to a list of lists for each team on home page
 ==============================================================
 
 aaronL -- 2019-05-29 13:08
@@ -267,9 +267,10 @@ stefanT -- 2019-05-29 21:26
 - Currently working on implementing circles into svg.
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+johnnyW -- 2019-05-30 13:34
 --------------------------------------------------------------
--
+- made paths in svg dark and visible
+- working on storing svg objects 
 ==============================================================
 
 firstL -- 2019-05-07 21:17
