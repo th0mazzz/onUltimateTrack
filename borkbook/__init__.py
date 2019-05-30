@@ -102,7 +102,13 @@ def account():
 def viewing_account():
     if 'username' not in session:
         return redirect(url_for('landing'))
-    return 'nixew'
+    view_username = request.args['username']
+    if view_username == session['username']:
+        return redirect(url_for('account'))
+    userInfo = database.getUser(request.args['username'])
+    name, age, height, weight, jersey = userInfo[3], userInfo[4], userInfo[5], userInfo[6], userInfo[7]
+    return render_template('account.html', username = view_username, name = name, age = age, height = height, weight = weight, jersey = jersey)
+
 
 @app.route('/create_team', methods=['POST'])
 def create_team():
