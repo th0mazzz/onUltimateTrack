@@ -98,6 +98,11 @@ def account():
     name, age, height, weight, jersey = userInfo[3], userInfo[4], userInfo[5], userInfo[6], userInfo[7]
     return render_template('account.html', username = username, name = name, age = age, height = height, weight = weight, jersey = jersey)
 
+@app.route('/viewing_account', methods=['GET'])
+def viewing_account():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    return 'nixew'
 
 @app.route('/create_team', methods=['POST'])
 def create_team():

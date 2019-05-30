@@ -235,7 +235,7 @@ def getRosterByTeamId(team_id):
             roster.append(player[0])
 
     #print('this is the userbase')
-    print(newUserbase)
+    #print(newUserbase)
     db.commit()
     db.close()
     return roster

@@ -2,6 +2,7 @@
 {% block title %} Borkbook | Pocket Playbook {% endblock %}
 
 {% block body %}
+
 <div class="container-fluid bg-light mt-0">
     <div class="container">
         <div class="row">
@@ -16,7 +17,12 @@
         <div class="row">
           <h2>Roster</h2>
         </div>
-        {{roster}}
+
+        {% for player in roster %}
+        <div class="row">
+          <a href="/viewing_account"><button class="btn btn-primary">{{player}}</button></a>
+        </div>
+        {% endfor %}
 
     </div>
     <script src="http://d3js.org/d3.v3.min.js"></script>
