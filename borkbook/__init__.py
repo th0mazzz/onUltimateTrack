@@ -141,7 +141,8 @@ def team():
     print(id)
     name, sport= database.getNameByTeamId(id), database.getSportByTeamId(id)
     roster = database.getRosterByTeamId(id)
-    return render_template('team.html', teamID = id, roster = roster)
+    invitecode = database.getInviteByTeamId(id)
+    return render_template('team.html', teamID = id, teamname = name, invitecode = invitecode, sport = sport, roster = roster)
 
 @app.route('/teamplays', methods=['GET'])
 def teamplays():
