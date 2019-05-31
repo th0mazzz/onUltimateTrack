@@ -314,9 +314,11 @@ thomasZ -- 2019-05-30 22:42
 - Got team invite code to show on team page (albeit uglily)
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+johnnyW -- 2019-05-31 00:11
 --------------------------------------------------------------
--
+- can now send play command_list from Ajax -> Python -> SQLite
+- added success message when play is sent to server
+- need to implement retrieval of plays from server to frontend
 ==============================================================
 
 firstL -- 2019-05-07 21:17

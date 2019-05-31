@@ -1,5 +1,5 @@
 #! /usr/bin/env python
-import os
+import os, json
 
 from flask import flash, Flask, render_template, redirect, request, session, url_for
 
@@ -177,10 +177,24 @@ def play():
         return redirect(url_for('landing'))
     return render_template('play.html')
 
+
 @app.route('/receiveObjects')
 def receiveObjects():
-    print(request.args)
-    print('--------------------')
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    # command_list is delimited by keyword 'STOP'
+    command_list = ""
+    for key in request.args:
+        if key != 'id' and key != 'name':
+            if key[0:4] == 'path':
+                command_list += request.args[key] + 'STOP'
+            if key[0:5] == 'click':
+                command_list += request.args[key] + 'STOP'
+    print(command_list)
+    print("--------------------------")
+    id = request.args['id']
+    playname = request.args['name']
+    database.createPlay(session['username'], playname, command_list, session['username'], id)
     return 'it worked'
 
 

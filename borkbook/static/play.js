@@ -6,19 +6,23 @@ THIS SECTION IS FOR SENDING SVG OBJECTS TO PYTHON
 
 var getSVGObjects = function(){
   var nodes = Array.prototype.slice.call(svg[0][0].childNodes)
-  var bigboy = {};
-  for (i = 1; i < nodes.length; i++){
+  var objects = {};
+  console.log(nodes)
+  for (i = 0; i < nodes.length; i++){
     /*
     inspect class of each SVG Obj
     if line it is a path
-    if circle it is a circle
-    if x it is a x
+    if click-circle it is a circle
     */
-
-    bigboy[`path${i}`] = nodes[i].getAttribute('d');
+    if (nodes[i].className){
+      if (nodes[i].className.baseVal == "line"){
+        objects[`path${i}`] = nodes[i].getAttribute("d")
+      } else if (nodes[i].className.baseVal == "click-circle"){
+        objects[`click-circle${i}`] = JSON.stringify({"cx":nodes[i].getAttribute("cx"),"cy":nodes[i].getAttribute("cy"), "r":nodes[i].getAttribute("r"), "fill":nodes[i].getAttribute("fill")});
+      }
+    }
   }
-  bigboy['circle1'] = JSON.stringify({'cx':12, 'cy':12})
-  return bigboy;
+  return objects;
 }
 
 var hideWarning = function(){
@@ -28,7 +32,9 @@ var hideWarning = function(){
 
 // sends attributes of SVG objects to Python as Strings
 var sendSVGObjects = function(){
-  var name = document.getElementById("playname").value.trim() // name of the play
+  var name = document.getElementById("playname").value.trim(); // name of the play
+  var id = document.getElementById("id").value.trim(); // id of team
+  console.log(id);
   if (name.length > 0){
     var dataRows = getSVGObjects(); // dictionary of SVG objects
     var xhttp = new XMLHttpRequest();
@@ -36,7 +42,17 @@ var sendSVGObjects = function(){
     Object.entries(dataRows).forEach(function([key, value]){
       query += `${key}=${value}&`
     });
-    query +=`name=${name}`
+    query +=`name=${name}&id=${id}`
+    xhttp.onreadystatechange = function(){
+      if (this.readyState == 4 && this.status == 200){
+        // change alert to successful message!
+        var alert = document.getElementById("alert");
+        alert.className = "row justify-content-center mt-2 text-success";
+        alert.innerHTML = "Success! Redirecting to previous team page..."
+        alert.style.visibility = "visible";
+        setTimeout(function(){window.location.href=`/team?team=${id}`}, 2000)
+      }
+    };
     xhttp.open("GET", "/receiveObjects" + query, true);
     xhttp.send();
   } else{
@@ -96,7 +112,7 @@ THIS SECTION IS FOR CIRCLES
 ---------------------------------------
 */
 
-// STEFAN DO THIS!!!!!!!!!!!!!
+
 var isLine = true;
 var isCircle = false;
 var isBlue = true;
