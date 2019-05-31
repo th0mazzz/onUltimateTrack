@@ -270,7 +270,7 @@ stefanT -- 2019-05-29 21:26
 johnnyW -- 2019-05-30 13:34
 --------------------------------------------------------------
 - made paths in svg dark and visible
-- working on storing svg objects 
+- working on storing svg objects
 ==============================================================
 
 aaronL -- 2019-05-30 13:37
@@ -294,9 +294,11 @@ thomasZ -- 2019-05-30 14:30
 - Added an aboutus.html heh
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+johnnyW -- 2019-05-30 21:44
 --------------------------------------------------------------
--
+- worked on front-end for createplay.html
+- worked on sending svg objects from ajax to python
+- need database methods to store objects
 ==============================================================
 
 firstL -- 2019-05-07 21:17

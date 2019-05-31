@@ -1,3 +1,9 @@
+/*
+---------------------------------------
+THIS SECTION IS FOR SENDING SVG OBJECTS TO PYTHON
+---------------------------------------
+*/
+
 var getSVGObjects = function(){
   var nodes = Array.prototype.slice.call(svg[0][0].childNodes)
   var bigboy = {};
@@ -15,31 +21,43 @@ var getSVGObjects = function(){
   return bigboy;
 }
 
-
-var sendSVGObjects = function(){
-  var dataRows = getSVGObjects();
-  var xhttp = new XMLHttpRequest();
-  var query = "?";
-  Object.entries(dataRows).forEach(function([key, value]){
-    console.log(key, value)
-    query += `${key}=${value}&`
-  });
-
-  console.log(query);
-  xhttp.open("GET", "/receiveObjects" + query, true);
-  xhttp.send();
-
+var hideWarning = function(){
+  document.getElementById("alert").style.visibility="hidden";
 }
+
+
+// sends attributes of SVG objects to Python as Strings
+var sendSVGObjects = function(){
+  var name = document.getElementById("playname").value.trim() // name of the play
+  if (name.length > 0){
+    var dataRows = getSVGObjects(); // dictionary of SVG objects
+    var xhttp = new XMLHttpRequest();
+    var query = "?";
+    Object.entries(dataRows).forEach(function([key, value]){
+      query += `${key}=${value}&`
+    });
+    query +=`name=${name}`
+    xhttp.open("GET", "/receiveObjects" + query, true);
+    xhttp.send();
+  } else{
+    // shows alert
+    document.getElementById("alert").style.visibility = "visible";
+    // hide alert after 1 second
+    setTimeout("hideWarning()", 1000)
+  }
+};
 
 var saveBtn = document.getElementById('submit')
 saveBtn.addEventListener('click', sendSVGObjects)
 
-//save.addEventListener('click',yeet)
-
-// based on http://bl.ocks.org/cloudshapes/5661984 by cloudshapes
+/*
+---------------------------------------
+THIS SECTION IS FOR SVG
+---------------------------------------
+*/
 
 var margin = {top: 0, right: 0, bottom: 0, left: 0},
-    width = 960 - margin.left - margin.right,
+    width = 1200 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 
@@ -48,8 +66,7 @@ var ptdata = [];
 var session = [];
 var path;
 var drawing = false;
-
-var output = d3.select('#output');
+var color = "";
 
 var line = d3.svg.line()
     .interpolate("bundle") // basis, see http://bl.ocks.org/mbostock/4342190
@@ -57,14 +74,14 @@ var line = d3.svg.line()
     .x(function(d, i) { return d.x; })
     .y(function(d, i) { return d.y; });
 
-var svg = d3.select("#sketch").append('svg')
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-
+// select SVG canvas
+var svg = d3.select("#sketch");
+var output = d3.select("#output");
 
 svg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+    // assign fxns to SVG for drawing
 svg
   .on("mousedown", listen)
   .on("touchstart", listen)
@@ -72,6 +89,49 @@ svg
   .on("touchleave", ignore)
   .on("mouseup", ignore)
   .on("mouseleave", ignore);
+
+/*
+---------------------------------------
+THIS SECTION IS FOR CIRCLES
+---------------------------------------
+*/
+
+// STEFAN DO THIS!!!!!!!!!!!!!
+
+// get circle buttons on menu
+var redCircle = document.getElementById("red-circle");
+var blueCircle = document.getElementById("blue-circle");
+var linebtn = document.getElementById("linebtn");
+
+redCircle.addEventListener("click", function(){
+  color = "red"
+  console.log(color)
+
+});
+
+blueCircle.addEventListener("click", function(){
+  color = "blue"
+  console.log(color)
+});
+
+linebtn.addEventListener("click", function(){
+  color = "";
+  console.log(color)
+});
+
+
+
+
+
+/*
+---------------------------------------
+THIS SECTION IS FOR CURVED PATH DRAWING
+---------------------------------------
+*/
+// based on http://bl.ocks.org/cloudshapes/5661984 by cloudshapes
+
+
+
 
 
 // ignore default touch behavior
@@ -109,6 +169,7 @@ function ignore () {
   if (!drawing) return;
   drawing = false;
 
+  // SCRAP Simplification
   before = ptdata.length;
   console.group('Line Simplification');
   console.log("Before simplification:", before)
