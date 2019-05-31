@@ -12,7 +12,21 @@
             <h2>{{sport}}<h2>
         </div>
         <div class="row">
-            <h3>Invite Code: {{invitecode}}<h3>
+
+          <div class="card-header" id="createTeam" data-toggle="collapse" data-target="#invitecode"
+              aria-expanded="true" aria-controls="invitecode">
+              <h5 class="text-center">
+                  Invite Code
+              </h5>
+          </div>
+          <div id="invitecode" class="collapse" aria-labelledby="createTeam">
+              <div class="card-body">
+                  <h3>{{invitecode}}</h3>
+              </div>
+          </div>
+
+
+
         </div>
         <div class="row">
             <div class="col-md-2"></div>
@@ -29,7 +43,7 @@
 
         {% for player in roster %}
         <div class="row">
-          <a href="{{'/viewing_account?username=' ~ player[0]}}"><button class="btn btn-primary">{{player[1]}}<br>{{player[0]}}</button></a>
+          <a href="{{'/viewing_account?username=' ~ player[0]}}"><button class="btn btn-primary">{{player[1]}} ({{player[0]}})</button></a>
         </div>
         {% endfor %}
 
