@@ -242,7 +242,7 @@ def getTeamInfo(team_id):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     teaminfo = c.execute('SELECT * from teams WHERE team_id = ?', (team_id,))
-
+    teaminfo = teaminfo.fetchone()
     db.commit()
     db.close()
     return teaminfo
@@ -275,7 +275,7 @@ def getRosterByTeamId(team_id):
         #playerInfo[4] is player_weight
         #playerInfo[5] is player_jersey
         #playerInfo[6] is teams, comma separated
-        teamIDs = playerInfo[5]
+        teamIDs = playerInfo[6]
         teamIDs = teamIDs.split(',')
         teamIDs.remove('')
         newUserbase.append((playerInfo[0], playerInfo[1], playerInfo[2], playerInfo[3], playerInfo[4], playerInfo[5], teamIDs))
