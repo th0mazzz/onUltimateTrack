@@ -321,9 +321,11 @@ stefanT -- 2019-05-30 22:50
   circle when drawing in the svg
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+thomasZ -- 2019-05-31 01:03
 --------------------------------------------------------------
--
+- Created update_account_info app.route
+- Added frontend for updating account info
+- Updating account info actually works now!
 ==============================================================
 
 firstL -- 2019-05-07 21:17

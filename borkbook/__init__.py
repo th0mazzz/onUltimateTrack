@@ -103,7 +103,7 @@ def account():
     #(username, password, team_ids, player_name, player_age, player_height, player_weight, player_jersey)
     print(userInfo)
     name, age, height, weight, jersey = userInfo[3], userInfo[4], userInfo[5], userInfo[6], userInfo[7]
-    return render_template('account.html', username = username, name = name, age = age, height = height, weight = weight, jersey = jersey)
+    return render_template('account.html', username = username, name = name, age = age, height = height, weight = weight, jersey = jersey, isownacc = 'yes')
 
 @app.route('/viewing_account', methods=['GET'])
 def viewing_account():
@@ -115,6 +115,20 @@ def viewing_account():
     userInfo = database.getUser(request.args['username'])
     name, age, height, weight, jersey = userInfo[3], userInfo[4], userInfo[5], userInfo[6], userInfo[7]
     return render_template('account.html', username = view_username, name = name, age = age, height = height, weight = weight, jersey = jersey)
+
+@app.route('/update_account_info', methods=['POST'])
+def update_account_info():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    name, age, height, weight, jersey = request.form['newname'], request.form['newage'], request.form['newheight'], request.form['newweight'], request.form['newjersey']
+    username = session['username']
+    database.changePlayerName(username, name)
+    database.changePlayerAge(username, age)
+    database.changePlayerHeight(username, height)
+    database.changePlayerWeight(username, weight)
+    database.changePlayerJersey(username, jersey)
+
+    return redirect(url_for('account'))
 
 @app.route('/jointeam', methods=["POST"])
 def invite():
