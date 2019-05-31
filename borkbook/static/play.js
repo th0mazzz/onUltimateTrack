@@ -136,7 +136,7 @@ function draw_circle(x, y) {
         .attr('class', 'click-circle')
         .attr("cx", x)
         .attr("cy", y)
-        .attr("r", 30)
+        .attr("r", 20)
         .attr("fill", "blue");
       }
     else {
@@ -144,7 +144,7 @@ function draw_circle(x, y) {
         .attr('class', 'click-circle')
         .attr("cx", x)
         .attr("cy", y)
-        .attr("r", 30)
+        .attr("r", 20)
         .attr("fill", "red");
     }
   }
