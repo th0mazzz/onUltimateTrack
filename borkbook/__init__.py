@@ -45,7 +45,6 @@ def home():
         if len(id) > 1 and teamname != None and teamsport != None:
             teams.append([teamname, id, teamsport])
     username = session['username']
-    database.isAdminOf(username)
     return render_template('home.html', username = username, teams= teams)
 
 @app.route('/logout')
