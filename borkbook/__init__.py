@@ -178,10 +178,11 @@ def play():
 
 @app.route('/receiveObjects')
 def receiveObjects():
-    if 'username' not in session:
-        return redirect(url_for('landing'))
     print(request.args)
-    return redirect(url_for('landing'))
+    print('--------------------')
+    return 'it worked'
+
+
 
 if __name__ == '__main__':
     app.debug = True
