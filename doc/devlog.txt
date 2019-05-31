@@ -314,9 +314,11 @@ thomasZ -- 2019-05-30 22:42
 - Got team invite code to show on team page (albeit uglily)
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+stefanT -- 2019-05-30 22:50
 --------------------------------------------------------------
--
+- Added drawing red/blue circle drawing functionality to svg
+- Users can now toggle between line, red circle, or blue 
+  circle when drawing in the svg
 ==============================================================
 
 firstL -- 2019-05-07 21:17
