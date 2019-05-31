@@ -317,8 +317,16 @@ thomasZ -- 2019-05-30 22:42
 stefanT -- 2019-05-30 22:50
 --------------------------------------------------------------
 - Added drawing red/blue circle drawing functionality to svg
-- Users can now toggle between line, red circle, or blue 
+- Users can now toggle between line, red circle, or blue
   circle when drawing in the svg
+
+==============================================================
+
+johnnyW -- 2019-05-31 00:11
+--------------------------------------------------------------
+- can now send play command_list from Ajax -> Python -> SQLite
+- added success message when play is sent to server
+- need to implement retrieval of plays from server to frontend
 ==============================================================
 
 thomasZ -- 2019-05-31 01:03
