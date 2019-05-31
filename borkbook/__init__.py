@@ -44,7 +44,9 @@ def home():
         teamsport = database.getSportByTeamId(id)
         if len(id) > 1 and teamname != None and teamsport != None:
             teams.append([teamname, id, teamsport])
-    return render_template('home.html', username = session['username'], teams= teams)
+    username = session['username']
+    database.isAdminOf(username)
+    return render_template('home.html', username = username, teams= teams)
 
 @app.route('/logout')
 def logout():
@@ -131,7 +133,7 @@ def update_account_info():
     return redirect(url_for('account'))
 
 @app.route('/jointeam', methods=["POST"])
-def invite():
+def jointeam():
     if 'username' not in session:
         return redirect(url_for('landing'))
     id = database.getTeamIdByInviteCode(request.form['joincode'])

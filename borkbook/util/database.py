@@ -166,6 +166,27 @@ def addTeamToUser(username, team_id):
     db.close()
     return True
 
+def addAdminToTeam(username, team_id):
+
+    ''' THIS METHOD IS STILL IN THE WORKINGS '''
+
+    '''
+    ADDS USER AS A TEAM ADMIN
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    if len(getTeamsByUser(username)) < 1:
+        # this is the user's first team
+        # delimit each team_id by a comma
+        c.execute('UPDATE users SET team_ids = ? WHERE username = ?', (team_id + ",", username))
+    else:
+        # the user is part of other teams
+        prevIDS = ",".join(getTeamsByUser(username))
+        c.execute('UPDATE users SET team_ids = ? WHERE username = ?', (prevIDS + ",{}".format(team_id), username))
+    db.commit()
+    db.close()
+    return True
+
 def getNameByTeamId(team_id):
     '''
     RETURNS TEAM NAME GIVEN TEAM_ID
@@ -247,6 +268,9 @@ def getRosterByTeamId(team_id):
     return roster
 
 def getInviteByTeamId(team_id):
+    '''
+    RETURNS INVITE CODE GIVEN TEAM ID
+    '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     code = c.execute('SELECT invite_code FROM teams WHERE team_id = ?', (team_id,))
@@ -256,6 +280,9 @@ def getInviteByTeamId(team_id):
     return returncode[0]
 
 def getTeamIdByInviteCode(joincode):
+    '''
+    RETURNS TEAM ID GIVEN INVITE CODE
+    '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     code = c.execute('SELECT team_id FROM teams WHERE invite_code = ?', (joincode,))
@@ -263,3 +290,16 @@ def getTeamIdByInviteCode(joincode):
     db.commit()
     db.close()
     return returncode[0]
+
+
+
+def isAdminOf(username):
+
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    on_teams = getTeamsByUser(username)
+    print(on_teams)
+
+    db.commit()
+    db.close()
+    return
