@@ -241,25 +241,29 @@ def getTeamsByUser(username):
 def getRosterByTeamId(team_id):
     '''
     RETURNS ROSTER OF TEAM GIVEN THE TEAM ID in the format (username, playername)
+    #username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    userbase = c.execute('SELECT username, player_name, team_ids FROM users')
+    userbase = c.execute('SELECT username, player_name, player_age, player_height, player_weight, team_ids FROM users')
     userbase = userbase.fetchall()
     newUserbase = []
     for playerInfo in userbase:
         #playerInfo[0] is username
         #playerInfo[1] is player_name
-        #playerInfo[2] is teams, comma separated
-        teamIDs = playerInfo[2]
+        #playerInfo[2] is player_age
+        #playerInfo[3] is player_height
+        #playerInfo[4] is player_weight
+        #playerInfo[5] is teams, comma separated
+        teamIDs = playerInfo[5]
         teamIDs = teamIDs.split(',')
         teamIDs.remove('')
-        newUserbase.append((playerInfo[0], playerInfo[1], teamIDs))
+        newUserbase.append((playerInfo[0], playerInfo[1], playerInfo[2], playerInfo[3], playerInfo[4], teamIDs))
 
     roster = []
     for player in newUserbase:
-        if team_id in player[2]:
-            roster.append((player[0], player[1]))
+        if team_id in player[5]:
+            roster.append((player[0], player[1], player[2], player[3], player[4]))
 
     #print('this is the userbase')
     #print(newUserbase)
