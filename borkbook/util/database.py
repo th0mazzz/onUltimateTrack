@@ -1,11 +1,11 @@
 import os, sqlite3, uuid
 
-#DIR = os.path.dirname(__file__)
-#DIR += '/'
+DIR = os.path.dirname(__file__) or '.'
+DIR += '/../'
 
-#DB_FILE = DIR + 'data/borkbook.db'
+DB_FILE = DIR + 'data/borkbook.db'
 
-DB_FILE = os.path.abspath("data/borkbook.db")
+#DB_FILE = os.path.abspath("data/borkbook.db")
 
 #method not accurate with schema no more
 def insert_test_data():
