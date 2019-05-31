@@ -25,7 +25,7 @@ def create_db():
     c = db.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS users(username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT)")
     c.execute("CREATE TABLE IF NOT EXISTS plays(creator TEXT, play_name TEXT, command_list TEXT, editor_list TEXT, team_ids TEXT, play_id TEXT PRIMARY KEY)")
-    c.execute("CREATE TABLE IF NOT EXISTS teams(team_name TEXT, sport TEXT, team_id TEXT PRIMARY KEY, team_admins TEXT)")
+    c.execute("CREATE TABLE IF NOT EXISTS teams(team_name TEXT, sport TEXT, team_id TEXT PRIMARY KEY, invite_code TEXT, team_admins TEXT)")
     db.commit()
     db.close()
 
@@ -140,7 +140,8 @@ def createTeam(team_name, sport, team_admin):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     team_id = str(uuid.uuid4())
-    c.execute('INSERT INTO teams VALUES (?,?,?,?)', (team_name, sport, team_id, team_admin))
+    invite_code = str(uuid.uuid4())
+    c.execute('INSERT INTO teams VALUES (?,?,?,?,?)', (team_name, sport, team_id, invite_code, team_admin))
     db.commit()
     db.close()
     addTeamToUser(team_admin, team_id)
@@ -175,7 +176,9 @@ def getNameByTeamId(team_id):
     select = c.fetchone()
     db.commit()
     db.close()
-    return select[0]
+    if select != None:
+        return select[0]
+    return None
 
 def getSportByTeamId(team_id):
     '''
@@ -187,7 +190,9 @@ def getSportByTeamId(team_id):
     select = c.fetchone()
     db.commit()
     db.close()
-    return select[0]
+    if select != None:
+        return select[0]
+    return None
 
 def getPlaysByTeamId(team_id):
     '''
@@ -240,3 +245,21 @@ def getRosterByTeamId(team_id):
     db.commit()
     db.close()
     return roster
+
+def getInviteByTeamId(team_id):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    code = c.execute('SELECT invite_code FROM teams WHERE team_id = ?', (team_id,))
+    returncode = code.fetchone()
+    db.commit()
+    db.close()
+    return returncode[0]
+
+def getTeamIdByInviteCode(joincode):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    code = c.execute('SELECT team_id FROM teams WHERE invite_code = ?', (joincode,))
+    returncode = code.fetchone()
+    db.commit()
+    db.close()
+    return returncode[0]

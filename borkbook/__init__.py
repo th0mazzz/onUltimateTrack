@@ -1,3 +1,4 @@
+#! /usr/bin/env python
 import os
 
 from flask import flash, Flask, render_template, redirect, request, session, url_for
@@ -35,12 +36,14 @@ def register():
 def home():
     if 'username' not in session:
         return redirect(url_for('landing'))
-    print(database.getTeamsByUser(session['username']))
+    #print(database.getTeamsByUser(session['username']))
     teams = []
     for id in database.getTeamsByUser(session['username']):
         print(id)
-        if len(id) > 1:
-            teams.append([database.getNameByTeamId(id), id, database.getSportByTeamId(id)])
+        teamname = database.getNameByTeamId(id)
+        teamsport = database.getSportByTeamId(id)
+        if len(id) > 1 and teamname != None and teamsport != None:
+            teams.append([teamname, id, teamsport])
     return render_template('home.html', username = session['username'], teams= teams)
 
 @app.route('/logout')
@@ -113,6 +116,14 @@ def viewing_account():
     name, age, height, weight, jersey = userInfo[3], userInfo[4], userInfo[5], userInfo[6], userInfo[7]
     return render_template('account.html', username = view_username, name = name, age = age, height = height, weight = weight, jersey = jersey)
 
+@app.route('/jointeam', methods=["POST"])
+def invite():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    id = database.getTeamIdByInviteCode(request.form['joincode'])
+    print('this is yo id: ' + str(id))
+    database.addTeamToUser(session['username'], id)
+    return redirect(url_for('home'))
 
 @app.route('/create_team', methods=['POST'])
 def create_team():

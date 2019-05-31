@@ -91,6 +91,36 @@
                 </div>
             </div>
         </div>
+
+        <div id="accordion" class="mb-4">
+            <div class="card m-3">
+                <div class="card-header" id="teamJoin" data-toggle="collapse" data-target="#teamJoinForm"
+                    aria-expanded="true" aria-controls="teamJoinForm">
+                    <h5 class="text-center">
+                        Join a Team
+                    </h5>
+                </div>
+                <div id="teamJoinForm" class="collapse" aria-labelledby="teamJoin">
+                    <div class="card-body">
+                        <form action="/jointeam" method="POST">
+                            <div class="form-group">
+                                <label for="joincode">Invite Code</label>
+                                <input type="text" class="form-control" id="user" aria-describedby="emailHelp"
+                                    placeholder="Enter invite code" name="joincode" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </div>
 {% endblock %}
