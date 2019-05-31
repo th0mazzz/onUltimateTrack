@@ -238,14 +238,33 @@ def getTeamsByUser(username):
     teamsUserIsOn = [x for x in teamsUserIsOn]
     return teamsUserIsOn
 
+def getTeamInfo(team_id):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    teaminfo = c.execute('SELECT * from teams WHERE team_id = ?', (team_id,))
+
+    db.commit()
+    db.close()
+    return teaminfo
+
+def getTeamsUserisAdminOf(username):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    teamsUserIsPartOf = getTeamsByUser(username)
+
+
+    db.commit()
+    db.close()
+    return
+
 def getRosterByTeamId(team_id):
     '''
     RETURNS ROSTER OF TEAM GIVEN THE TEAM ID in the format (username, playername)
-    #username TEXT PRIMARY KEY, password TEXT, team_ids TEXT, player_name TEXT, player_age INT, player_height INT, player_weight INT, player_jersey INT
+    (name, age, height, weight, jersey)
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    userbase = c.execute('SELECT username, player_name, player_age, player_height, player_weight, team_ids FROM users')
+    userbase = c.execute('SELECT username, player_name, player_age, player_height, player_weight, player_jersey, team_ids FROM users')
     userbase = userbase.fetchall()
     newUserbase = []
     for playerInfo in userbase:
@@ -254,16 +273,17 @@ def getRosterByTeamId(team_id):
         #playerInfo[2] is player_age
         #playerInfo[3] is player_height
         #playerInfo[4] is player_weight
-        #playerInfo[5] is teams, comma separated
+        #playerInfo[5] is player_jersey
+        #playerInfo[6] is teams, comma separated
         teamIDs = playerInfo[5]
         teamIDs = teamIDs.split(',')
         teamIDs.remove('')
-        newUserbase.append((playerInfo[0], playerInfo[1], playerInfo[2], playerInfo[3], playerInfo[4], teamIDs))
+        newUserbase.append((playerInfo[0], playerInfo[1], playerInfo[2], playerInfo[3], playerInfo[4], playerInfo[5], teamIDs))
 
     roster = []
     for player in newUserbase:
-        if team_id in player[5]:
-            roster.append((player[0], player[1], player[2], player[3], player[4]))
+        if team_id in player[6]:
+            roster.append((player[0], player[1], player[2], player[3], player[4], player[5]))
 
     #print('this is the userbase')
     #print(newUserbase)
@@ -294,16 +314,3 @@ def getTeamIdByInviteCode(joincode):
     db.commit()
     db.close()
     return returncode[0]
-
-
-
-def isAdminOf(username):
-
-    db = sqlite3.connect(DB_FILE)
-    c = db.cursor()
-    on_teams = getTeamsByUser(username)
-    print(on_teams)
-
-    db.commit()
-    db.close()
-    return
