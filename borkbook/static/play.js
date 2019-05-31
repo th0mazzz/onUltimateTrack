@@ -97,31 +97,58 @@ THIS SECTION IS FOR CIRCLES
 */
 
 // STEFAN DO THIS!!!!!!!!!!!!!
+var isLine = true;
+var isCircle = false;
+var isBlue = true;
 
 // get circle buttons on menu
 var redCircle = document.getElementById("red-circle");
 var blueCircle = document.getElementById("blue-circle");
 var linebtn = document.getElementById("linebtn");
 
-redCircle.addEventListener("click", function(){
-  color = "red"
-  console.log(color)
+var toggleBlue = function() {
+  isLine = false;
+  isCircle = true;
+  isBlue = true;
+}
 
-});
+var toggleRed = function() {
+  isLine = false;
+  isCircle = true;
+  isBlue = false;
+}
 
-blueCircle.addEventListener("click", function(){
-  color = "blue"
-  console.log(color)
-});
+var toggleLine = function() {
+  isLine = true;
+  isCircle = false;
+}
 
-linebtn.addEventListener("click", function(){
-  color = "";
-  console.log(color)
-});
+redCircle.addEventListener("click", toggleRed);
 
+blueCircle.addEventListener("click", toggleBlue);
 
+linebtn.addEventListener("click", toggleLine);
 
-
+function draw_circle(x, y) {
+  if (isCircle) {
+    if (isBlue) {
+      svg.append("circle")
+        .attr('class', 'click-circle')
+        .attr("cx", x)
+        .attr("cy", y)
+        .attr("r", 30)
+        .attr("fill", "blue");
+      }
+    else {
+      svg.append("circle")
+        .attr('class', 'click-circle')
+        .attr("cx", x)
+        .attr("cy", y)
+        .attr("r", 30)
+        .attr("fill", "red");
+    }
+  }
+}
 
 /*
 ---------------------------------------
@@ -144,6 +171,7 @@ touchEvents.forEach(function (eventName) {
 
 
 function listen () {
+  if (isLine) {
   drawing = true;
   output.text('event: ' + d3.event.type);
   ptdata = []; // reset point data
@@ -158,56 +186,69 @@ function listen () {
     svg.on("touchmove", onmove);
   }
 }
-
-function ignore () {
-  var before, after;
-  output.text('event: ' + d3.event.type);
-  svg.on("mousemove", null);
-  svg.on("touchmove", null);
-
-  // skip out if we're not drawing
-  if (!drawing) return;
-  drawing = false;
-
-  // SCRAP Simplification
-  before = ptdata.length;
-  console.group('Line Simplification');
-  console.log("Before simplification:", before)
-
-  after = ptdata.length;
-
-  console.log("After simplification:", ptdata.length)
-  console.groupEnd();
-
-  var percentage = parseInt(100 - (after/before)*100, 10);
-  output.html('Points: ' + before + ' => ' + after + '. <b>' + percentage + '% simplification.</b>');
-
-  // add newly created line to the drawing session
-  session.push(ptdata);
-
-  // redraw the line after simplification
-  tick();
+else if (isCircle) {
+  svg.on("click", function() {
+    var coords = d3.mouse(this);
+    console.log(coords);
+    draw_circle(coords[0], coords[1]);
+  });
+  }
 }
 
+function ignore () {
+  if (isLine) {
+    var before, after;
+    output.text('event: ' + d3.event.type);
+    svg.on("mousemove", null);
+    svg.on("touchmove", null);
+
+    // skip out if we're not drawing
+    if (!drawing) return;
+    drawing = false;
+
+    // SCRAP Simplification
+    before = ptdata.length;
+    console.group('Line Simplification');
+    console.log("Before simplification:", before)
+
+    after = ptdata.length;
+
+    console.log("After simplification:", ptdata.length)
+    console.groupEnd();
+
+    var percentage = parseInt(100 - (after/before)*100, 10);
+    output.html('Points: ' + before + ' => ' + after + '. <b>' + percentage + '% simplification.</b>');
+
+    // add newly created line to the drawing session
+    session.push(ptdata);
+
+    // redraw the line after simplification
+    tick();
+  }
+}
 
 function onmove (e) {
-  var type = d3.event.type;
-  var point;
+  if (isLine) {
+    var type = d3.event.type;
+    var point;
 
-  if (type === 'mousemove') {
-    point = d3.mouse(this);
-    output.text('event: ' + type + ': ' + d3.mouse(this));
-  } else {
-    // only deal with a single touch input
-    point = d3.touches(this)[0];
-    output.text('event: ' + type + ': ' + d3.touches(this)[0]);
+    if (type === 'mousemove') {
+      point = d3.mouse(this);
+      output.text('event: ' + type + ': ' + d3.mouse(this));
+    } else {
+      // only deal with a single touch input
+      point = d3.touches(this)[0];
+      output.text('event: ' + type + ': ' + d3.touches(this)[0]);
+    }
+
+    // push a new data point onto the back
+    ptdata.push({ x: point[0], y: point[1] });
+    tick();
   }
-
-  // push a new data point onto the back
-  ptdata.push({ x: point[0], y: point[1] });
-  tick();
 }
 
 function tick() {
-  path.attr("d", function(d) { return line(d); }) // Redraw the path:
+  if (isLine) {
+    path.attr("d", function(d) { return line(d); }) // Redraw the path:
+  }
 }
