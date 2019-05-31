@@ -84,6 +84,7 @@ var path;
 var drawing = false;
 var color = "";
 
+
 var line = d3.svg.line()
     .interpolate("bundle") // basis, see http://bl.ocks.org/mbostock/4342190
     .tension(1)
@@ -105,6 +106,68 @@ svg
   .on("touchleave", ignore)
   .on("mouseup", ignore)
   .on("mouseleave", ignore);
+
+/*
+---------------------------------------
+THIS SECTION IS FOR UTILITY BUTTONS
+---------------------------------------
+*/
+// check if Object is path or circle
+var checkObject = function(child){
+  if (child.className){
+    if (child.className.baseVal == "line"){
+      return true;
+    }
+    if (child.className.baseVal == "click-circle"){
+      return true;
+    }
+  };
+  return false;
+
+};
+
+var undoStack = [];
+
+var undoBtn = document.getElementById("undo");
+
+var undo = function(e){
+    var canvas = svg[0][0];
+    if (checkObject(canvas.lastChild)){
+      // remove the last child and pushes to undoArray
+      undoStack.push(canvas.removeChild(canvas.lastChild));
+    }
+};
+
+var redoBtn = document.getElementById("redo");
+
+var redo = function(e){
+    var canvas = svg[0][0];
+    var lastObj = undoStack.pop();
+    console.log(lastObj);
+    canvas.appendChild(lastObj);
+};
+
+var clearBtn = document.getElementById("clear");
+
+
+// removes all paths and circles from svg
+var clear = function(e){
+    var canvas = svg[0][0]
+    children = canvas.childNodes;
+    console.log(children);
+    for (i = 0; i < children.length; i++){
+      console.log(i, checkObject(children[i]));
+      if (checkObject(children[i])){
+        canvas.removeChild(children[i]);
+        i -= 1;
+      }
+    };
+    console.log(children);
+};
+
+undoBtn.addEventListener('click', undo);
+redoBtn.addEventListener('click', redo);
+clearBtn.addEventListener('click', clear);
 
 /*
 ---------------------------------------
