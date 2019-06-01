@@ -1,18 +1,43 @@
 {% extends "base.html" %}
 {% block title %} Borkbook | Pocket Playbook {% endblock %}
-<!--
-<link rel="stylesheet" href="{{ url_for('static', filename='play.css') }}">
--->
+
+
 {% block body %}
 <div class="container-fluid bg-light mt-0">
     <div class="container">
-        <div class="row row justify-content-center">
+      <div class="row justify-content-center">
+        <h2>{{play}}</h2>
+      </div>
+      <div class="row justify-content-center">
           <svg id="sketch" class="border border-dark" width="100%" height="600px">
 
           </svg>
-        </div>
+      </div>
     </div>
 
     <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script>
+      var sketch = document.getElementById("sketch")
+      {% for command in commands %}
+        var command = "{{command | safe}}"
+        if (command.substring(0, 1) == "{"){
+          command = command.replace(/'/g, '"');
+          var dict = JSON.parse(command);
+          var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+          circle.setAttribute("class", "click-circle")
+          circle.setAttribute("cx", dict["cx"]);
+          circle.setAttribute("cy", dict["cy"]);
+          circle.setAttribute("r", dict["r"]);
+          circle.setAttribute("fill", dict["fill"]);
+          sketch.appendChild(circle);
+        } else {
+          var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          path.setAttribute("class", "line");
+          path.setAttribute("d", command);
+          sketch.appendChild(path);
+        }
+      {% endfor %}
+    </script>
+
 </div>
 {% endblock %}

@@ -354,9 +354,10 @@ aaronL -- 2019-05-31 14:04
 - added roster table, with appropriate columns
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+johnnyW -- 2019-06-01 18:47
 --------------------------------------------------------------
--
+- can now retrieve plays from SQL -> Python -> JS
+- solution was messy but is functional!!!!!
 ==============================================================
 
 firstL -- 2019-05-07 21:17

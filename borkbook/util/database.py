@@ -130,6 +130,18 @@ def createPlay(creator, play_name, command_list, editor_list, team_id):
     db.close()
     return True
 
+def getPlay(play_id):
+    '''
+    RETURNS PLAY command_list
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute('SELECT command_list FROM plays WHERE play_id = ?', (play_id,))
+    select = c.fetchone()
+    db.commit()
+    db.close()
+    return select[0]
+
 def editPlay(play_name, team_id):
     return 'WILL BE IMPLEMETED IN THE FUTURE'
 

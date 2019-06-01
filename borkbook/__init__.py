@@ -187,10 +187,21 @@ def writePlay():
     return redirect(url_for('teamplays', team = id))
 
 @app.route('/play')
-def play():
+def sendPlay():
     if 'username' not in session:
         return redirect(url_for('landing'))
-    return render_template('play.html')
+    id = request.args['team']
+    playid = request.args['playid']
+    playname = request.args['play']
+    commands = database.getPlay(playid).split('STOP')
+    print(commands.pop())
+    print('----------')
+    for x in range(len(commands)):
+        # if command is circle
+        if commands[x][0] == "{" :
+            commands[x] = json.loads(commands[x])
+    print(commands)
+    return render_template('play.html', commands = commands, play=playname)
 
 
 @app.route('/receiveObjects')
@@ -211,6 +222,8 @@ def receiveObjects():
     playname = request.args['name']
     database.createPlay(session['username'], playname, command_list, session['username'], id)
     return 'it worked'
+
+
 
 
 
