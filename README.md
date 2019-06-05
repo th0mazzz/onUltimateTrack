@@ -53,7 +53,7 @@ $ python3 -m venv name
 6. Change the permissions by entering ```chgrp -R www-data ccereal``` and ```chmod -R g+w ccereal```.
 7. Install all the dependencies needed by typing ```$pip install -r <path-to-file>requirements.txt```.
 8. Move the .conf file to the site-enabled directory by typing ```$ mv borkbook/borkbook.conf ~/etc/apache2/sites-enabled/```.
-9. Enable the site by entering ```a2ensite borkbook```. 
+9. Enable the site by entering ```a2ensite borkbook``` in the terminal. 
 10. Either reload or restart the apache2 server by typing ```service apache2 reload``` or ```service apache2 restart```. 
 11. Enter your ip address into your browser and enjoy our web application!
 
