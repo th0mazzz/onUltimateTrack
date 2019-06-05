@@ -363,6 +363,7 @@ johnnyW -- 2019-06-01 18:47
 aaronL -- 2019-06-02 13:27
 --------------------------------------------------------------
 - fixed spaces between team cards and links
+- fixed row and column arrangement for cards
 ==============================================================
 
 firstL -- 2019-05-07 21:17
