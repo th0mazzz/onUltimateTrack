@@ -21,14 +21,17 @@
         <p class="mt-2 mr-5 ml-5 mb-5" style="color: red;">You aren't in any teams. Go join one!</p>
         {% else %}
         {% for i in range((teams|length // 4) + 1) %}
+        {{ i }}
         <!-- Row stuff -->
-        <div class="row mt-3 ml-3 mr-3">
+        <div class="row mt-3 ml-2 mr-2">
             {% for j in teams[i * 4: i * 4 + 4] %}
             <div class="col-md-3">
-                <a href="{{'/team?team=' ~ [j][i][1] }}" style="text-decoration: none;">
-                    <div class="card" style="width: 18rem;">
+                {{ j }}
+                <a href="{{'/team?team=' ~ [j][i][0] }}" style="text-decoration: none;">
+                    <div class="card ml-1 mr-1">
                         <div class="card-body">
-                            <h4 class="card-title" style="color: black; text-decoration: underline;">{{ [j][i][0] }}</h4>
+                            <h4 class="card-title" style="color: black; text-decoration: underline;">{{ [j][i][0] }}
+                            </h4>
                             <h6 class="card-subtitle mb-2 text-muted">{{ [j][i][2] }}</h6>
                         </div>
                     </div>
