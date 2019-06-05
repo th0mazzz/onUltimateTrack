@@ -49,28 +49,7 @@ $ python3 -m venv name
 2. Grant yourself sudo acess by entering '''sudo su''' into your terminal. 
 3. Move to the directory where the project will be located by entering ```cd /var/www/```. Then create a directory for the project by typing ```mkdir borkbook``` and after ```cd borkbook```.
 4. Clone the repo ```$ git clone https://github.com/th0mazzz/onUltimateTrack.git```.
-5. Replace the ip address after ServerName with your own ip adress in borkbook.conf. 
-```
-<VirtualHost *:80>
-
-             ServerName <your ip address>
-             
-             WSGIScriptAlias / /var/www/borkbook/borkbook.wsgi
-             <Directory /var/www/borkbook/borkbook/>
-                        Order allow,deny
-                        Allow from all
-             </Directory>
-             Alias /static /var/www/borkbook/borkbook/static
-             <Directory /var/www/borkbook/borkbook/static/>
-                        Order allow,deny
-                        Allow from all
-              </Directory>
-	      ErrorLog ${APACHE_LOG_DIR}/error.log
-              LogLevel warn
-              CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>
-``` 
-
+5. Replace the ```<ip address>``` after ServerName with your own ip address in borkbook.conf. 
 6. Change the permissions by entering ```chgrp -R www-data ccereal``` and ```chmod -R g+w ccereal```.
 7. Install all the dependencies needed by typing ```$pip install -r <path-to-file>requirements.txt```.
 8. Move the .conf file to the site-enabled directory by typing ```$ mv borkbook/borkbook.conf ~/etc/apache2/sites-enabled/```.
