@@ -130,6 +130,18 @@ def createPlay(creator, play_name, command_list, editor_list, team_id):
     db.close()
     return True
 
+def getPlay(play_id):
+    '''
+    RETURNS PLAY command_list
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute('SELECT command_list FROM plays WHERE play_id = ?', (play_id,))
+    select = c.fetchone()
+    db.commit()
+    db.close()
+    return select[0]
+
 def editPlay(play_name, team_id):
     return 'WILL BE IMPLEMETED IN THE FUTURE'
 
@@ -151,6 +163,27 @@ def createTeam(team_name, sport, team_admin):
 def addTeamToUser(username, team_id):
     '''
     INSERT TEAM ID TO CORRESPONDING USERNAME
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    if len(getTeamsByUser(username)) < 1:
+        # this is the user's first team
+        # delimit each team_id by a comma
+        c.execute('UPDATE users SET team_ids = ? WHERE username = ?', (team_id + ",", username))
+    else:
+        # the user is part of other teams
+        prevIDS = ",".join(getTeamsByUser(username))
+        c.execute('UPDATE users SET team_ids = ? WHERE username = ?', (prevIDS + ",{}".format(team_id), username))
+    db.commit()
+    db.close()
+    return True
+
+def addAdminToTeam(username, team_id):
+
+    ''' THIS METHOD IS STILL IN THE WORKINGS '''
+
+    '''
+    ADDS USER AS A TEAM ADMIN
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -217,28 +250,52 @@ def getTeamsByUser(username):
     teamsUserIsOn = [x for x in teamsUserIsOn]
     return teamsUserIsOn
 
+def getTeamInfo(team_id):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    teaminfo = c.execute('SELECT * from teams WHERE team_id = ?', (team_id,))
+    teaminfo = teaminfo.fetchone()
+    db.commit()
+    db.close()
+    return teaminfo
+
+def getTeamsUserisAdminOf(username):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    teamsUserIsPartOf = getTeamsByUser(username)
+
+
+    db.commit()
+    db.close()
+    return
+
 def getRosterByTeamId(team_id):
     '''
     RETURNS ROSTER OF TEAM GIVEN THE TEAM ID in the format (username, playername)
+    (name, age, height, weight, jersey)
     '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    userbase = c.execute('SELECT username, player_name, team_ids FROM users')
+    userbase = c.execute('SELECT username, player_name, player_age, player_height, player_weight, player_jersey, team_ids FROM users')
     userbase = userbase.fetchall()
     newUserbase = []
     for playerInfo in userbase:
         #playerInfo[0] is username
         #playerInfo[1] is player_name
-        #playerInfo[2] is teams, comma separated
-        teamIDs = playerInfo[2]
+        #playerInfo[2] is player_age
+        #playerInfo[3] is player_height
+        #playerInfo[4] is player_weight
+        #playerInfo[5] is player_jersey
+        #playerInfo[6] is teams, comma separated
+        teamIDs = playerInfo[6]
         teamIDs = teamIDs.split(',')
         teamIDs.remove('')
-        newUserbase.append((playerInfo[0], playerInfo[1], teamIDs))
+        newUserbase.append((playerInfo[0], playerInfo[1], playerInfo[2], playerInfo[3], playerInfo[4], playerInfo[5], teamIDs))
 
     roster = []
     for player in newUserbase:
-        if team_id in player[2]:
-            roster.append((player[0], player[1]))
+        if team_id in player[6]:
+            roster.append((player[0], player[1], player[2], player[3], player[4], player[5]))
 
     #print('this is the userbase')
     #print(newUserbase)
@@ -247,6 +304,9 @@ def getRosterByTeamId(team_id):
     return roster
 
 def getInviteByTeamId(team_id):
+    '''
+    RETURNS INVITE CODE GIVEN TEAM ID
+    '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     code = c.execute('SELECT invite_code FROM teams WHERE team_id = ?', (team_id,))
@@ -256,6 +316,9 @@ def getInviteByTeamId(team_id):
     return returncode[0]
 
 def getTeamIdByInviteCode(joincode):
+    '''
+    RETURNS TEAM ID GIVEN INVITE CODE
+    '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     code = c.execute('SELECT team_id FROM teams WHERE invite_code = ?', (joincode,))

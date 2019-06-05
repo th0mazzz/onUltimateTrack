@@ -44,7 +44,8 @@ def home():
         teamsport = database.getSportByTeamId(id)
         if len(id) > 1 and teamname != None and teamsport != None:
             teams.append([teamname, id, teamsport])
-    return render_template('home.html', username = session['username'], teams= teams)
+    username = session['username']
+    return render_template('home.html', username = username, teams= teams)
 
 @app.route('/logout')
 def logout():
@@ -131,7 +132,7 @@ def update_account_info():
     return redirect(url_for('account'))
 
 @app.route('/jointeam', methods=["POST"])
-def invite():
+def jointeam():
     if 'username' not in session:
         return redirect(url_for('landing'))
     id = database.getTeamIdByInviteCode(request.form['joincode'])
@@ -186,10 +187,21 @@ def writePlay():
     return redirect(url_for('teamplays', team = id))
 
 @app.route('/play')
-def play():
+def sendPlay():
     if 'username' not in session:
         return redirect(url_for('landing'))
-    return render_template('play.html')
+    id = request.args['team']
+    playid = request.args['playid']
+    playname = request.args['play']
+    commands = database.getPlay(playid).split('STOP')
+    print(commands.pop())
+    print('----------')
+    for x in range(len(commands)):
+        # if command is circle
+        if commands[x][0] == "{" :
+            commands[x] = json.loads(commands[x])
+    print(commands)
+    return render_template('play.html', commands = commands, play=playname)
 
 
 @app.route('/receiveObjects')
@@ -210,6 +222,8 @@ def receiveObjects():
     playname = request.args['name']
     database.createPlay(session['username'], playname, command_list, session['username'], id)
     return 'it worked'
+
+
 
 
 
