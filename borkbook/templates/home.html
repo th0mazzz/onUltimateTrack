@@ -44,10 +44,35 @@
         <hr>
         <div class="row mt-1 ml-3 mr-3">
             <div class="col">
-                <h1>Teams you're managing</h1>
-
+                <h1>Teams You're Managing</h1>
             </div>
         </div>
+
+        {% if adminTeams|length == 0 %}
+        <p class="mt-2 mr-5 ml-5 mb-5" style="color: red;">You aren't managing any teams. Go create one!</p>
+        {% else %}
+        {% for i in range((adminTeams|length // 4) + 1) %}
+        <!-- {{ i }} -->
+        <!-- Row stuff -->
+        <div class="row mt-3 ml-2 mr-2">
+            {% for j in adminTeams[i * 4: i * 4 + 4] %}
+            <div class="col-md-3">
+                <!-- {{ j[0] }} -->
+                <a href="{{'/team?team=' ~ [j][0][1] }}" style="text-decoration: none;">
+                    <div class="card ml-1 mr-1">
+                        <div class="card-body">
+                            <h4 class="card-title" style="color: black; text-decoration: underline;">{{ [j][0][0] }}
+                            </h4>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ [j][0][2] }}</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        {% endif %}
+
         <div id="accordion" class="mb-4">
             <div class="card m-3">
                 <div class="card-header" id="createTeam" data-toggle="collapse" data-target="#createTeamForm"

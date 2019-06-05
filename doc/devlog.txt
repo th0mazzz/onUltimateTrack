@@ -366,9 +366,10 @@ aaronL -- 2019-06-02 13:27
 - fixed row and column arrangement for cards
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+thomasZ -- 2019-06-05 14:03
 --------------------------------------------------------------
--
+- Team admins are only the team creators
+- Teams you're admining now appear on the home screen
 ==============================================================
 
 firstL -- 2019-05-07 21:17

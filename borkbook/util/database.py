@@ -178,27 +178,6 @@ def addTeamToUser(username, team_id):
     db.close()
     return True
 
-def addAdminToTeam(username, team_id):
-
-    ''' THIS METHOD IS STILL IN THE WORKINGS '''
-
-    '''
-    ADDS USER AS A TEAM ADMIN
-    '''
-    db = sqlite3.connect(DB_FILE)
-    c = db.cursor()
-    if len(getTeamsByUser(username)) < 1:
-        # this is the user's first team
-        # delimit each team_id by a comma
-        c.execute('UPDATE users SET team_ids = ? WHERE username = ?', (team_id + ",", username))
-    else:
-        # the user is part of other teams
-        prevIDS = ",".join(getTeamsByUser(username))
-        c.execute('UPDATE users SET team_ids = ? WHERE username = ?', (prevIDS + ",{}".format(team_id), username))
-    db.commit()
-    db.close()
-    return True
-
 def getNameByTeamId(team_id):
     '''
     RETURNS TEAM NAME GIVEN TEAM_ID
@@ -259,15 +238,22 @@ def getTeamInfo(team_id):
     db.close()
     return teaminfo
 
-def getTeamsUserisAdminOf(username):
+def getTeamsIdsUserisAdminOf(username):
+    '''
+    RETURNS TEAM IDS OF TEAMS USER IS ADMIN OF (ASSUMING ONLY CREATOR IS ADMIN)
+    '''
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-    teamsUserIsPartOf = getTeamsByUser(username)
-
-
+    teams = c.execute('SELECT team_id FROM teams WHERE team_admins = ?', (username,))
+    teamsUserIsAdminOf = c.fetchall()
+    #print('teamsUserIsAdminOf')
+    #print(teamsUserIsAdminOf)
+    newlist = [value[0] for value in teamsUserIsAdminOf]
+    print('newlist')
+    print(newlist)
     db.commit()
     db.close()
-    return
+    return newlist
 
 def getRosterByTeamId(team_id):
     '''
@@ -326,3 +312,15 @@ def getTeamIdByInviteCode(joincode):
     db.commit()
     db.close()
     return returncode[0]
+
+def getTeamAdmin(team_id):
+    '''
+    RETURNS TEAM ADMIN ASSUMING THAT TEAM CREATOR IS THE SOLE TEAM ADMIN
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    admin = c.execute('SELECT team_admins FROM teams WHERE team_id = ?', (team_id,))
+    thesoleadmin = admin.fetchone()
+    db.commit()
+    db.close()
+    return thesoleadmin[0]

@@ -45,7 +45,21 @@ def home():
         if len(id) > 1 and teamname != None and teamsport != None:
             teams.append([teamname, id, teamsport])
     username = session['username']
-    return render_template('home.html', username = username, teams= teams)
+
+    print('printing')
+    teamsUserIsAdminOf = database.getTeamsIdsUserisAdminOf(username)
+    adminTeams = []
+
+    if teamsUserIsAdminOf != None:
+        for id in teamsUserIsAdminOf:
+            print('id')
+            print(id)
+            teamname = database.getNameByTeamId(id)
+            teamsport = database.getSportByTeamId(id)
+            if len(id) > 1 and teamname != None and teamsport != None:
+                adminTeams.append([teamname, id, teamsport])
+
+    return render_template('home.html', username = username, teams= teams, adminTeams = adminTeams)
 
 @app.route('/logout')
 def logout():
