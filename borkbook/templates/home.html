@@ -27,7 +27,7 @@
             {% for j in teams[i * 4: i * 4 + 4] %}
             <div class="col-md-3">
                 <!-- {{ j[0] }} -->
-                <a href="{{'/team?team=' ~ [j][0][0] }}" style="text-decoration: none;">
+                <a href="{{'/team?team=' ~ [j][0][1] }}" style="text-decoration: none;">
                     <div class="card ml-1 mr-1">
                         <div class="card-body">
                             <h4 class="card-title" style="color: black; text-decoration: underline;">{{ [j][0][0] }}
