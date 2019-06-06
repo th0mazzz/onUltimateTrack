@@ -394,6 +394,7 @@ thomasZ -- 2019-06-06 14:31
 - Touched __init__.py, team.html, and database.py
 - Implemented admin feature of removing players
 - If admin removes himself, next in roster is next admin
+- Slightly ugly back buttons on play.html and teamplays.html
 ==============================================================
 
 firstL -- 2019-05-07 21:17

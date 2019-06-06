@@ -223,7 +223,7 @@ def sendPlay():
         if commands[x][0] == "{" :
             commands[x] = json.loads(commands[x])
     print(commands)
-    return render_template('play.html', commands = commands, play=playname)
+    return render_template('play.html', commands = commands, play=playname, teamID = id)
 
 
 @app.route('/receiveObjects')
