@@ -358,3 +358,11 @@ def fillNewAdmin(team_id):
     db.commit()
     db.close()
     return True
+
+def removePlay(playid, team_id):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute('DELETE FROM plays WHERE play_id = ? AND team_ids = ?', (playid, team_id))
+    db.commit()
+    db.close()
+    return True

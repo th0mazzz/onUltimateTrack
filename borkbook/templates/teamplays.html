@@ -22,6 +22,9 @@
                         <tr>
                             <th scope="col">Play</th>
                             <th scope="col">Author</th>
+                            {% if currentUser == teamAdmin %}
+                            <th scope="col"><th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>
@@ -33,6 +36,15 @@
                               </a>
                             </th>
                             <td>{{ play[0] }}</td>
+                            {% if currentUser == teamAdmin %}
+                            <td>
+                              <form action="/removePlay">
+                                  <input type="hidden" name="playid" value="{{play[5]}}">
+                                  <input type="hidden" name="teamID" value="{{ teamID }}">
+                                  <input type="submit" name="submit" value="Remove"></input>
+                              </form>
+                            <td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>

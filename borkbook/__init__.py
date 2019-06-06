@@ -187,10 +187,11 @@ def teamplays():
         return redirect(url_for('landing'))
     print(request.args)
     id = request.args['team']
+    teamAdmin = database.getTeamAdmin(id)
     teamname = database.getNameByTeamId(id)
     plays = database.getPlaysByTeamId(id)
     print(plays)
-    return render_template('teamplays.html', plays = plays, teamname = teamname, teamID = id)
+    return render_template('teamplays.html', plays = plays, teamname = teamname, teamID = id, teamAdmin = teamAdmin, currentUser = session['username'])
 
 @app.route('/createplay', methods=['GET'])
 def createplay():
@@ -225,6 +226,13 @@ def sendPlay():
     print(commands)
     return render_template('play.html', commands = commands, play=playname, teamID = id)
 
+@app.route('/removePlay')
+def removePlay():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    playid, teamid = request.args['playid'], request.args['teamID']
+    database.removePlay(playid, teamid)
+    return redirect(url_for('teamplays', team = teamid))
 
 @app.route('/receiveObjects')
 def receiveObjects():
