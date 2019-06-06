@@ -51,16 +51,29 @@
                             <th scope="col">Age</th>
                             <th scope="col">Height</th>
                             <th scope="col">Weight</th>
+                            {% if teamAdmin == currentUser %}
+                            <th scope="col"></th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>
                         {% for i in roster %}
                         <tr>
                             <th scope="row">{{ i[5] }}</th>
-                            <td>{{ i[1] }}</td>
+                            <td>{{ i[1] }} {% if teamAdmin == i[0] %} (admin) {% endif %}</td>
                             <td>{{ i[2] }}</td>
                             <td>{{ i[3] }}</td>
                             <td>{{ i[4] }}</td>
+                            {% if teamAdmin == currentUser %}
+                            <td>
+                                <form action="/removePlayer">
+                                    <input type="hidden" name="username" value="{{ i[0] }}">
+                                    <input type="hidden" name="teamID" value="{{ teamID }}">
+
+                                    <input type="submit" name="submit" value="Remove"></input>
+                                </form>
+                            </td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>

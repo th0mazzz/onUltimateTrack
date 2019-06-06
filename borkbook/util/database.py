@@ -223,6 +223,7 @@ def getTeamsByUser(username):
     RETURNS LIST OF TEAM_IDS THAT USER username IS PART OF
     '''
     userInfo = getUser(username)
+    #print('userInfo', userInfo)
     #print(userInfo)
     teamsUserIsOn = userInfo[2]
     teamsUserIsOn = teamsUserIsOn.split(',')
@@ -249,8 +250,8 @@ def getTeamsIdsUserisAdminOf(username):
     #print('teamsUserIsAdminOf')
     #print(teamsUserIsAdminOf)
     newlist = [value[0] for value in teamsUserIsAdminOf]
-    print('newlist')
-    print(newlist)
+    #print('newlist')
+    #print(newlist)
     db.commit()
     db.close()
     return newlist
@@ -324,3 +325,36 @@ def getTeamAdmin(team_id):
     db.commit()
     db.close()
     return thesoleadmin[0]
+
+def removeFromRoster(playername, team_id):
+    '''
+    REMOVES PLAYER FROM TEAM_IDS
+    '''
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    teams = getTeamsByUser(playername)
+    print('teams')
+    print(teams)
+    if team_id in teams:
+        teams.remove(team_id)
+    newroster = ''
+    for each in teams:
+        newroster = newroster + ',' + each
+    c.execute('UPDATE users SET team_ids = ? WHERE username = ?', (newroster, playername))
+    c.execute('UPDATE teams SET team_admins = "" WHERE team_id = ? AND team_admins = ?', (team_id, playername))
+    db.commit()
+    db.close()
+    fillNewAdmin(team_id)
+    return True
+
+def fillNewAdmin(team_id):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    roster = getRosterByTeamId(team_id)
+    if len(roster) == 0:
+        return "there ain't anyone on the team"
+    newadmin = roster[0][0] #new admin
+    c.execute('UPDATE teams SET team_admins = ? WHERE team_id = ? AND team_admins = ""', (newadmin, team_id))
+    db.commit()
+    db.close()
+    return True

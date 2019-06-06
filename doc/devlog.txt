@@ -375,18 +375,35 @@ thomasZ -- 2019-06-05 14:03
 team -- 2019-06-05 23:59
 --------------------------------------------------------------
 - Team nentindoe are creating a website that allows user to
-  login using their emails to draw images and post them 
+  login using their emails to draw images and post them
   publicly.
-- They were only successful in getting the basic components 
-  done, such as the login/logout and the drawing. However, 
+- They were only successful in getting the basic components
+  done, such as the login/logout and the drawing. However,
   they were unable to get user profile, groups, galleries, and
-  saving images functional. Attempting to deploy it on a VM was 
-  unsuccessful as well as it led to a 500 Internal Server Error. 
+  saving images functional. Attempting to deploy it on a VM was
+  unsuccessful as well as it led to a 500 Internal Server Error.
 - We believe that the 500 Internal Server Error is a result of
   not using absolute path as we had encountered a similar issue.
-  Other issues can be fixed through implementation of new code or 
-  revision of current code. 
+  Other issues can be fixed through implementation of new code or
+  revision of current code.
 - The other team was team nentindoe.
+==============================================================
+
+thomasZ -- 2019-06-06 14:31
+--------------------------------------------------------------
+- Touched __init__.py, team.html, and database.py
+- Implemented admin feature of removing players
+- If admin removes himself, next in roster is next admin
+==============================================================
+
+firstL -- 2019-05-07 21:17
+--------------------------------------------------------------
+-
+==============================================================
+
+firstL -- 2019-05-07 21:17
+--------------------------------------------------------------
+-
 ==============================================================
 
 firstL -- 2019-05-07 21:17

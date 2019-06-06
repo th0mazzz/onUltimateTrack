@@ -167,11 +167,19 @@ def team():
     if 'username' not in session:
         return redirect(url_for('landing'))
     id = request.args['team']
-    print(id)
+    teamAdmin = database.getTeamAdmin(id)
+    print('teamadmin:', teamAdmin)
+    #print(id)
+    #print('testing remove from roster')
+    #database.removeFromRoster('a', '42c5a762-8637-4400-b53e-cbb9cca81995')
     name, sport= database.getNameByTeamId(id), database.getSportByTeamId(id)
     roster = database.getRosterByTeamId(id)
+
+    print('roster', str(roster))
+    print(str(roster[0][0]) == teamAdmin)
+
     invitecode = database.getInviteByTeamId(id)
-    return render_template('team.html', teamID = id, teamname = name, invitecode = invitecode, sport = sport, roster = roster)
+    return render_template('team.html', teamID = id, teamname = name, invitecode = invitecode, sport = sport, roster = roster, teamAdmin = teamAdmin, currentUser = session['username'])
 
 @app.route('/teamplays', methods=['GET'])
 def teamplays():
@@ -237,8 +245,15 @@ def receiveObjects():
     database.createPlay(session['username'], playname, command_list, session['username'], id)
     return 'it worked'
 
-
-
+@app.route('/removePlayer')
+def removePlayer():
+    if 'username' not in session:
+        return redirect(url_for('landing'))
+    print(request.args)
+    database.removeFromRoster(request.args['username'], request.args['teamID'])
+    if session['username'] == request.args['username']:
+        return redirect(url_for('home'))
+    return redirect(url_for('team', team = request.args['teamID']))
 
 
 if __name__ == '__main__':
