@@ -4,38 +4,59 @@
 {% block body %}
 <div class="container-fluid mt-0">
     <div class="container">
-        <div class="row">
-            <h1> {{username}}'s Profile </h1>
+        <div class="row text-center">
+            <div class="col">
+                <h1 class="display-3" style="font-style: italic;">{{username}}'s Profile </h1>
+            </div>
         </div>
 
         <div class="row">
-            <div class="col md-6">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-3">
                 <div class="row">
-                    <h3>Name: {{name}} </h3>
+                    <h3>Name:</h3>
                 </div>
                 <div class="row">
-                    <h3> Age: {{age}} </h3>
+                    <h3> Age:</h3>
                 </div>
                 <div class="row">
-                    <h3> Height: {{height}} </h3>
+                    <h3> Height:</h3>
                 </div>
                 <div class="row">
-                    <h3> Weight: {{weight}} </h3>
+                    <h3> Weight:</h3>
                 </div>
                 <div class="row">
-                    <h3> Jersey Number: {{jersey}} </h3>
+                    <h3> Jersey Number:</h3>
                 </div>
             </div>
-
-            <div class="col md-6">
-                {% if isownacc == "yes" %}
-                <div class="col md-6>"
-                    <div class="card m-1">
-                        <div class="card-header" id="editName" data-toggle="collapse" data-target="#accountForm"
-                            aria-expanded="true" aria-controls="accountForm">
-                            <text>Edit Account Information</text>
-                        </div>
-                        <div id="accountForm" class="collapse" aria-labelledby="editName">
+            <div class="col-sm-3">
+                <div class="row">
+                    <h3>{{name}} </h3>
+                </div>
+                <div class="row">
+                    <h3>{{age}} </h3>
+                </div>
+                <div class="row">
+                    <h3>{{height}} </h3>
+                </div>
+                <div class="row">
+                    <h3>{{weight}} </h3>
+                </div>
+                <div class="row">
+                    <h3>{{jersey}} </h3>
+                </div>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+        <div class="row mt-4 text-center">
+            {% if isownacc == "yes" %}
+            <div class="col" class="card m-1">
+                <button class="btn btn-info" id="editName" data-toggle="collapse" data-target="#accountForm"
+                    aria-expanded="true" aria-controls="accountForm">Edit Account Information</button>
+                <div id="accountForm" class="collapse" aria-labelledby="editName">
+                    <div class="row">
+                        <div class="col-md-2"></div>
+                        <div class="col">
                             <div class="card-body">
                                 <form action="/update_account_info" method="POST">
                                     <div class="form-group">
@@ -65,7 +86,8 @@
                                     <div class="form-group">
                                         <label for="newjersey">Updated Jersey Number</label>
                                         <input type="text" class="form-control" id="user" aria-describedby="emailHelp"
-                                            placeholder="Enter new jersey number" value={{jersey}} name="newjersey" required>
+                                            placeholder="Enter new jersey number" value={{jersey}} name="newjersey"
+                                            required>
                                     </div>
 
                                     <div class="row">
@@ -76,18 +98,21 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="col-md-2"></div>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
 
 
-      {% endif %}
+    {% endif %}
 
-    </div> <!-- closes container -->
+</div> <!-- closes container -->
 
 
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="{{url_for('static', filename='play.js')}}"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="{{url_for('static', filename='play.js')}}"></script>
 </div>
 {% endblock %}
