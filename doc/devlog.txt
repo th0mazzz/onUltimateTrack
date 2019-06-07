@@ -403,6 +403,13 @@ aaronL -- 2019-06-06 21:46
 - fixed row/col alignment for team name
 ==============================================================
 
+aaronL -- 2019-06-06 23:09
+--------------------------------------------------------------
+- fixed container background color
+- fixed alignment in home.html
+- added copy paste js
+==============================================================
+
 firstL -- 2019-06-06 14:57
 --------------------------------------------------------------
 - Added infrastructure to delete plays as admin

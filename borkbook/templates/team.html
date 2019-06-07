@@ -3,43 +3,53 @@
 
 {% block body %}
 
-<div class="container-fluid bg-light mt-0">
+<div class="container-fluid mt-0">
     <div class="container">
         <div class="row text-center">
             <div class="col">
                 <h1 class="display-3" style="font-style: italic;">{{teamname}}</h1>
             </div>
         </div>
-        <div class="row">
-            <h2>{{sport}}<h2>
-        </div>
-        <div class="row">
-            <div class="card-header" id="createTeam" data-toggle="collapse" data-target="#invitecode"
-                aria-expanded="true" aria-controls="invitecode">
-                <h5 class="text-center">
-                    Invite Code
-                </h5>
-            </div>
-            <div id="invitecode" class="collapse" aria-labelledby="createTeam">
-                <div class="card-body">
-                    <h3>{{invitecode}}</h3>
-                </div>
-            </div>
-
-
-
-        </div>
-        <div class="row">
-            <div class="col-md-2"></div>
+        <div class="row text-center">
             <div class="col">
-                <a href="{{'/teamplays?team=' ~ teamID}}"><button class="btn btn-primary">View Team Plays</button></a>
-            </div>
-            <div class="col">
-                <a href="{{'/createplay?team=' ~ teamID}}"><button class="btn btn-primary">Create a Play</button></a>
+                <h3>Sport: <small class="text-secondary">{{sport}}</small>
+                    <h3>
             </div>
         </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <div id="alertTip" class="alert alert-success" style="display: none;">Copied invite code to clipboard</div>
+            </div>
+        </div>
+
         <div class="row">
-            <h2>Roster</h2>
+            <div class="col-md-4 text-center mb-1">
+                <!-- <button class="btn btn-primary" id="createTeam" data-toggle="collapse" data-target="#invitecode"
+                aria-expanded="true" aria-controls="invitecode">Invite Code</button>
+                <div id="invitecode" class="collapse" aria-labelledby="createTeam">
+                    <div class="card-body">
+                        <h3>{{invitecode}}</h3>
+                    </div>
+                </div> -->
+                <button id="clipBtn" class="btn btn-secondary" data-clipboard-text="{{ invitecode }}">
+                    Copy Invite Code
+                </button>
+            </div>
+
+            <div class="col-md-4 text-center mb-1">
+                <a href="{{'/teamplays?team=' ~ teamID}}"><button class="btn btn-primary">View Team
+                        Plays</button></a>
+            </div>
+            <div class="col-md-4 text-center mb-1">
+                <a href="{{'/createplay?team=' ~ teamID}}"><button class="btn btn-success">Create a
+                        Play</button></a>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <h2 class="text-center">Roster</h2>
+            </div>
         </div>
 
         <div class="row mt-2">
@@ -70,8 +80,7 @@
                                 <form action="/removePlayer">
                                     <input type="hidden" name="username" value="{{ i[0] }}">
                                     <input type="hidden" name="teamID" value="{{ teamID }}">
-
-                                    <input type="submit" name="submit" value="Remove"></input>
+                                    <button class="btn btn-danger" type="submit" name="submit">Remove</button>
                                 </form>
                             </td>
                             {% endif %}
@@ -84,7 +93,10 @@
 
 
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="../static/clipboard.js-master/dist/clipboard.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="{{url_for('static', filename='play.js')}}"></script>
+    <script src="{{url_for('static', filename='clip.js')}}"></script>
 </div>
 {% endblock %}
