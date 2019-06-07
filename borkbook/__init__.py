@@ -94,12 +94,22 @@ def auth2():
             flash('Passwords do not match')
             return redirect(url_for('register'))
 
-        player_name = request.form['player_name']
-        player_age = request.form['player_age']
-        player_height = request.form['player_height']
-        player_weight = request.form['player_weight']
-        player_jersey = request.form['player_jersey']
+        player_name = request.form['player_name'].strip()
+        player_age = request.form['player_age'].strip()
+        player_height = request.form['player_height'].strip()
+        player_weight = request.form['player_weight'].strip()
+        player_jersey = request.form['player_jersey'].strip()
 
+        if player_name == "":
+            player_name = "N/A"
+        if player_age == "":
+            player_age = "N/A"
+        if player_height == "":
+            player_height = "N/A"
+        if player_weight == "":
+            player_weight = "N/A"
+        if player_jersey == "":
+            player_jersey = "N/A"
 
         database.registerUser(user, pwd, player_name, player_age, player_height, player_weight, player_jersey)
 
