@@ -397,6 +397,12 @@ thomasZ -- 2019-06-06 14:31
 - Slightly ugly back buttons on play.html and teamplays.html
 ==============================================================
 
+aaronL -- 2019-06-06 21:46
+--------------------------------------------------------------
+- working on team.html
+- fixed row/col alignment for team name
+==============================================================
+
 firstL -- 2019-06-06 14:57
 --------------------------------------------------------------
 - Added infrastructure to delete plays as admin
