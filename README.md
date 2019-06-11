@@ -16,7 +16,7 @@ For the Ultimate Track team :sunglasses:
 * Database Manager (SQLite)
 * SVG Manipulator (SVG, JavaScript)
 
-## [Watch our video demo here](www.google.com)
+## [Watch our video demo here](https://www.google.com/)
 
 ## Overview:
 TL;DR: Playbook for teams of any sport!  
