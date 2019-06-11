@@ -1,5 +1,5 @@
 # Borkbook :notebook_with_decorative_cover:  
-## onUltimateTrack - Thomas Zhao, Xiaojie (Aaron) Li, Stefan Tan, Johnny Wong 
+## onUltimateTrack - Thomas Zhao, Xiaojie (Aaron) Li, Stefan Tan, Johnny Wong
 For the Ultimate Track team :sunglasses:
 
 ## Roles
@@ -11,12 +11,12 @@ For the Ultimate Track team :sunglasses:
 * App Developer (app.py, Python)
 ### Stefan Tan
 * SVG Manipulator (SVG, JavaScript)
-* App Developer (app.py, Python) 
+* App Developer (app.py, Python)
 ### Johnny Wong
 * Database Manager (SQLite)
 * SVG Manipulator (SVG, JavaScript)
 
-## [Watch our video demo here](https://www.google.com/)
+## [Watch our video demo here](https://youtu.be/ugZRMDN8umo)
 
 ## Overview:
 TL;DR: Playbook for teams of any sport!  
@@ -48,15 +48,15 @@ $ python3 -m venv name
 
 ### To Install and run on Apache2:
 1. SSH into your droplet by entering ```ssh <user>@<your ip address>``` into your terminal.
-2. Grant yourself sudo acess by entering '''sudo su''' into your terminal. 
+2. Grant yourself sudo acess by entering '''sudo su''' into your terminal.
 3. Move to the directory where the project will be located by entering ```cd /var/www/```. Then create a directory for the project by typing ```mkdir borkbook``` and after ```cd borkbook```.
 4. Clone the repo ```$ git clone https://github.com/th0mazzz/onUltimateTrack.git```.
-5. Replace the ```<ip address>``` after ServerName with your own ip address in borkbook.conf. 
+5. Replace the ```<ip address>``` after ServerName with your own ip address in borkbook.conf.
 6. Change the permissions by entering ```chgrp -R www-data ccereal``` and ```chmod -R g+w ccereal```.
 7. Install all the dependencies needed by typing ```$pip install -r <path-to-file>requirements.txt```.
 8. Move the .conf file to the site-enabled directory by typing ```$ mv borkbook/borkbook.conf ~/etc/apache2/sites-enabled/```.
-9. Enable the site by entering ```a2ensite borkbook``` in the terminal. 
-10. Either reload or restart the apache2 server by typing ```service apache2 reload``` or ```service apache2 restart```. 
+9. Enable the site by entering ```a2ensite borkbook``` in the terminal.
+10. Either reload or restart the apache2 server by typing ```service apache2 reload``` or ```service apache2 restart```.
 11. Enter your ip address into your browser and enjoy our web application!
 
 ## Dependencies:
