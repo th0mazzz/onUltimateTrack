@@ -432,9 +432,13 @@ thomasZ -- 2019-06-06 23:51
   making it default to "N/A" if they don't input anything
 ==============================================================
 
-firstL -- 2019-05-07 21:17
+johnnyW -- 2019-06-07 00:02
 --------------------------------------------------------------
--
+- Changed app.secret_key to be static for apache2 server to not
+- log users out when it changes
+- Changed file permission of data/ so apache2 server doesn't have to
+- manually change it
+- Removed driver.py
 ==============================================================
 firstL -- 2019-05-07 21:17
 --------------------------------------------------------------

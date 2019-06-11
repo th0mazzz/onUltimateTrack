@@ -16,6 +16,8 @@ For the Ultimate Track team :sunglasses:
 * Database Manager (SQLite)
 * SVG Manipulator (SVG, JavaScript)
 
+## [Watch our video demo here](https://www.google.com/)
+
 ## Overview:
 TL;DR: Playbook for teams of any sport!  
 Borkbook is a web-based application that aids teams by organizing their playbooks, rosters, and game stats. It would be helpful for teams to better communicate and explain plays through visuals (created using SVG and stored in a database) while making them easily accessible and editable by the creator and team admin.

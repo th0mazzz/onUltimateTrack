@@ -6,7 +6,7 @@ from flask import flash, Flask, render_template, redirect, request, session, url
 from util import database
 
 app = Flask(__name__)
-app.secret_key = os.urandom(32)
+app.secret_key = "doa9jwdoiawjmdoawidnmawlmd90123u10293u819jADIOJOAKJmxnoiJAOAJDOIJDNOMZKOAJsyEET"
 
 #DIR = os.path.dirname(__file__)
 #DIR += '/'
