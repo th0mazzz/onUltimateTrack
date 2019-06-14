@@ -52,7 +52,7 @@ $ python3 -m venv name
 3. Move to the directory where the project will be located by entering ```cd /var/www/```. Then create a directory for the project by typing ```mkdir borkbook``` and after ```cd borkbook```.
 4. Clone the repo ```$ git clone https://github.com/th0mazzz/onUltimateTrack.git```.
 5. Replace the ```<ip address>``` after ServerName with your own ip address in borkbook.conf.
-6. Change the permissions by entering ```chgrp -R www-data ccereal``` and ```chmod -R g+w ccereal```.
+6. Change the permissions by entering ```chgrp -R www-data borkbook``` and ```chmod -R g+w borkbook```.
 7. Install all the dependencies needed by typing ```$pip install -r <path-to-file>requirements.txt```.
 8. Move the .conf file to the site-enabled directory by typing ```$ mv borkbook/borkbook.conf ~/etc/apache2/sites-enabled/```.
 9. Enable the site by entering ```a2ensite borkbook``` in the terminal.
